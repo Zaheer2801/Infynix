@@ -1,6 +1,7 @@
 import { Reveal } from "../Reveal";
 import { SectionLabel } from "../SectionLabel";
 import { IconCheck, IconArrowRight } from "../Icons";
+import { openContactModal } from "@/lib/contact-modal";
 
 const items = [
   "Strategic talent acquisition across 50+ technology domains",
