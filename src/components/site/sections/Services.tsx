@@ -76,7 +76,7 @@ export function Services() {
             const Icon = s.icon;
             return (
               <Reveal key={s.title} delay={i * 60}>
-                <article className="group relative bg-dark p-8 h-full border-t-2 border-transparent hover:border-primary transition-colors">
+                <article className="group relative bg-dark p-8 h-full border-t-2 border-t-transparent hover:border-t-primary transition-colors">
                   <Icon className="text-primary" width={32} height={32} />
                   <h3 className="mt-6 text-xl font-semibold">{s.title}</h3>
                   <p className="mt-3 text-sm text-dark-muted leading-relaxed">{s.desc}</p>
