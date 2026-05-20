@@ -41,7 +41,7 @@ export function Hero() {
               Explore Services <IconArrowRight width={16} height={16} />
             </a>
             <button
-              onClick={() => import("@/lib/contact-modal").then((m) => m.openContactModal())}
+              onClick={openContactModal}
               className="inline-flex items-center gap-2 border border-dark-border text-dark-foreground hover:border-primary hover:text-primary px-7 py-3.5 text-sm font-semibold transition-colors"
             >
               Talk to an Expert
