@@ -46,6 +46,13 @@ const items: Item[] = [
 ];
 
 export function Industries() {
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section id="industries" className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24">
@@ -65,10 +72,18 @@ export function Industries() {
             const Icon = it.icon;
             return (
               <Reveal key={it.title} delay={i * 60}>
-                <article className="group p-8 border border-border bg-card border-t-2 border-t-transparent hover:border-t-primary transition-colors h-full">
-                  <Icon className="text-primary" width={32} height={32} />
-                  <h3 className="mt-6 text-lg font-semibold text-foreground">{it.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+                <article
+                  onMouseEnter={handleMove}
+                  onMouseMove={handleMove}
+                  className="industry-card group relative overflow-hidden p-8 border border-border bg-card h-full isolate transition-colors duration-300"
+                >
+                  <Icon className="relative z-10 text-primary transition-colors duration-500 group-hover:text-white" width={32} height={32} />
+                  <h3 className="relative z-10 mt-6 text-lg font-semibold text-foreground transition-colors duration-500 group-hover:text-white">
+                    {it.title}
+                  </h3>
+                  <p className="relative z-10 mt-3 text-sm text-muted-foreground leading-relaxed transition-colors duration-500 group-hover:text-white/90">
+                    {it.desc}
+                  </p>
                 </article>
               </Reveal>
             );
