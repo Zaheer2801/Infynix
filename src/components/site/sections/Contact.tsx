@@ -264,8 +264,8 @@ export function Contact() {
               </p>
               <div className="mt-7 space-y-4 text-sm">
                 {[
-                  { Icon: Phone, label: "(219) 249-0009" },
-                  { Icon: Mail, label: "hr@ireshtechnologies.com" },
+                  { Icon: Phone, label: "Phone" },
+                  { Icon: Mail, label: "Email" },
                   { Icon: Clock, label: "Mon – Fri, 8 AM – 6 PM PST" },
                   { Icon: MapPin, label: "St Louis, MO · London, UK" },
                 ].map(({ Icon, label }) => (
