@@ -208,19 +208,35 @@ export function Contact() {
         {/* INFO ROW */}
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <InfoCard icon={<Phone size={18} />} title="Phone">
-            <ul className="space-y-2.5">
+            <div className="flex items-center gap-3 pt-1">
               {phones.map((p) => (
-                <KV key={p.label} k={p.label} v={p.value} href={`tel:${p.value.replace(/\D/g, "")}`} />
+                <a
+                  key={p.label}
+                  href={`tel:${p.value.replace(/\D/g, "")}`}
+                  aria-label={`${p.label} ${p.value}`}
+                  title={`${p.label}: ${p.value}`}
+                  className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
+                >
+                  <Phone size={16} />
+                </a>
               ))}
-            </ul>
+            </div>
           </InfoCard>
 
           <InfoCard icon={<Mail size={18} />} title="Email">
-            <ul className="space-y-2.5">
+            <div className="flex items-center gap-3 pt-1">
               {emails.map((e) => (
-                <KV key={e.label} k={e.label} v={e.value} href={`mailto:${e.value}`} />
+                <a
+                  key={e.label}
+                  href={`mailto:${e.value}`}
+                  aria-label={`${e.label} ${e.value}`}
+                  title={`${e.label}: ${e.value}`}
+                  className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
+                >
+                  <Mail size={16} />
+                </a>
               ))}
-            </ul>
+            </div>
           </InfoCard>
 
           <InfoCard icon={<Clock size={18} />} title="Business Hours">
@@ -264,8 +280,8 @@ export function Contact() {
               </p>
               <div className="mt-7 space-y-4 text-sm">
                 {[
-                  { Icon: Phone, label: "Phone" },
-                  { Icon: Mail, label: "Email" },
+                  { Icon: Phone, label: "(219) 249-0009" },
+                  { Icon: Mail, label: "hr@ireshtechnologies.com" },
                   { Icon: Clock, label: "Mon – Fri, 8 AM – 6 PM PST" },
                   { Icon: MapPin, label: "St Louis, MO · London, UK" },
                 ].map(({ Icon, label }) => (
