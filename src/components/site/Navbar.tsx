@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IconMenu, IconClose } from "./Icons";
 import { openContactModal } from "@/lib/contact-modal";
+import logoMark from "@/assets/logo-mark.png";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -27,8 +28,17 @@ export function Navbar() {
       className={`sticky top-0 z-50 bg-background border-b border-border ${scrolled ? "shadow-[0_1px_0_0_var(--color-border)]" : ""}`}
     >
       <nav className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#top" className="font-bold tracking-tight text-[15px] text-foreground">
-          IRESH <span className="text-primary">TECHNOLOGIES</span>
+        <a href="#top" className="flex items-center gap-2.5">
+          <img
+            src={logoMark}
+            alt="Iresh Technologies"
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain"
+          />
+          <span className="font-bold tracking-tight text-[15px] text-foreground leading-none">
+            IRESH <span className="text-primary">TECHNOLOGIES</span>
+          </span>
         </a>
 
         <ul className="hidden lg:flex items-center gap-8">
