@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IconMenu, IconClose } from "./Icons";
+import { openContactModal } from "@/lib/contact-modal";
 
 const links = [
   { label: "Services", href: "#services" },
@@ -7,7 +8,7 @@ const links = [
   { label: "Solutions", href: "#process" },
   { label: "About", href: "#about" },
   { label: "Careers", href: "#footer" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "#contact", action: "contact" as const },
 ];
 
 export function Navbar() {
@@ -35,6 +36,12 @@ export function Navbar() {
             <li key={l.label}>
               <a
                 href={l.href}
+                onClick={(e) => {
+                  if ((l as { action?: string }).action === "contact") {
+                    e.preventDefault();
+                    openContactModal();
+                  }
+                }}
                 className="text-sm text-foreground/80 hover:text-primary transition-colors"
               >
                 {l.label}
@@ -43,12 +50,12 @@ export function Navbar() {
           ))}
         </ul>
 
-        <a
-          href="#contact"
+        <button
+          onClick={openContactModal}
           className="hidden lg:inline-flex items-center bg-primary text-primary-foreground hover:bg-primary-hover px-5 py-2.5 text-sm font-semibold transition-colors"
         >
           Work Together
-        </a>
+        </button>
 
         <button
           className="lg:hidden text-foreground"
@@ -66,7 +73,13 @@ export function Navbar() {
               <li key={l.label}>
                 <a
                   href={l.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    if ((l as { action?: string }).action === "contact") {
+                      e.preventDefault();
+                      openContactModal();
+                    }
+                    setOpen(false);
+                  }}
                   className="block text-sm text-foreground/80"
                 >
                   {l.label}
@@ -74,13 +87,15 @@ export function Navbar() {
               </li>
             ))}
             <li>
-              <a
-                href="#contact"
-                onClick={() => setOpen(false)}
+              <button
+                onClick={() => {
+                  openContactModal();
+                  setOpen(false);
+                }}
                 className="inline-block bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold"
               >
                 Work Together
-              </a>
+              </button>
             </li>
           </ul>
         </div>
