@@ -104,6 +104,13 @@ const techs: Tech[] = [
 ];
 
 export function TechStack() {
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24">
@@ -121,6 +128,8 @@ export function TechStack() {
           {techs.map((t, i) => (
             <Reveal key={t.name} delay={i * 30}>
               <div
+                onMouseEnter={handleMove}
+                onMouseMove={handleMove}
                 className="tech-card group relative overflow-hidden bg-background p-6 flex items-center gap-4 h-full transition-colors duration-500"
                 style={
                   {
