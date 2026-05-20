@@ -208,3 +208,14 @@
   width: 250%;
   height: 250%;
 }
+
+/* Social icon glow on hover */
+.social-glow {
+  position: relative;
+}
+.social-glow:hover {
+  box-shadow:
+    0 0 0 4px color-mix(in oklab, var(--primary) 18%, transparent),
+    0 8px 24px -4px color-mix(in oklab, var(--primary) 55%, transparent),
+    0 0 28px color-mix(in oklab, var(--primary) 45%, transparent);
+}
