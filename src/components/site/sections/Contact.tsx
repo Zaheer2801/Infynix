@@ -6,14 +6,14 @@ import {
   Mail,
   Clock,
   Globe,
-  ShieldCheck,
-  BadgeCheck,
   ArrowRight,
   Linkedin,
   Facebook,
   Youtube,
 } from "lucide-react";
 import type { SVGProps } from "react";
+import eVerifyLogo from "@/assets/e-verify.png";
+import dunsLogo from "@/assets/duns-registered.png";
 
 const IconX = (p: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -150,11 +150,20 @@ export function Contact() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <span className="inline-flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold border-[1.5px] border-primary text-primary">
-                <ShieldCheck size={16} /> Verified E-Verify
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-background px-4 py-2 text-sm font-semibold border-[1.5px] border-accent text-accent-foreground" style={{ borderColor: "var(--accent)", color: "color-mix(in oklab, var(--accent) 70%, black)" }}>
-                <BadgeCheck size={16} /> Registered D-U-N-S
+              <a
+                href="https://www.e-verify.gov/e-verify-employer-search"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="E-Verify Employer Search"
+                className="cert-badge inline-flex items-center justify-center rounded-lg bg-background px-4 py-2 border border-border transition-all duration-300"
+              >
+                <img src={eVerifyLogo} alt="E-Verify" className="h-8 w-auto object-contain" />
+              </a>
+              <span
+                aria-label="D-U-N-S Registered"
+                className="cert-badge inline-flex items-center justify-center rounded-lg bg-background px-4 py-2 border border-border transition-all duration-300"
+              >
+                <img src={dunsLogo} alt="D-U-N-S Registered" className="h-10 w-auto object-contain" />
               </span>
             </div>
           </div>
