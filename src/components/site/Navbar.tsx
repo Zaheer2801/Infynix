@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IconMenu, IconClose } from "./Icons";
 import { openContactModal } from "@/lib/contact-modal";
-import logoMark from "@/assets/logo-mark.png";
+
 
 const links = [
   { label: "Services", href: "#services" },
