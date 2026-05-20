@@ -1,5 +1,6 @@
 import { Reveal } from "../Reveal";
 import { IconArrowRight } from "../Icons";
+import { openContactModal } from "@/lib/contact-modal";
 
 const stats = [
   ["15+", "Years Experience"],
