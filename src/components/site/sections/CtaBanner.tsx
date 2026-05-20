@@ -1,5 +1,6 @@
 import { Reveal } from "../Reveal";
 import { IconArrowRight } from "../Icons";
+import { openContactModal } from "@/lib/contact-modal";
 
 export function CtaBanner() {
   return (
@@ -14,12 +15,12 @@ export function CtaBanner() {
             that deliver measurable ROI.
           </p>
           <div className="mt-10 flex flex-wrap gap-4 justify-center">
-            <a
-              href="#contact"
+            <button
+              onClick={openContactModal}
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary-hover px-7 py-3.5 text-sm font-semibold transition-colors"
             >
               Start a Conversation <IconArrowRight width={16} height={16} />
-            </a>
+            </button>
             <a
               href="tel:+12192490009"
               className="inline-flex items-center gap-2 border border-dark-border hover:border-primary hover:text-primary px-7 py-3.5 text-sm font-semibold transition-colors"
