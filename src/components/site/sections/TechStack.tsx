@@ -4,8 +4,6 @@ import {
   SiNextdotjs,
   SiPython,
   SiFastapi,
-  SiAmazon,
-  SiMicrosoftazure,
   SiDocker,
   SiKubernetes,
   SiLangchain,
@@ -17,9 +15,9 @@ import {
   SiMongodb,
   SiApachespark,
   SiSalesforce,
-  SiTableau,
   SiSap,
 } from "react-icons/si";
+import { FaAws, FaMicrosoft, FaChartBar } from "react-icons/fa";
 import { Reveal } from "../Reveal";
 import { SectionLabel } from "../SectionLabel";
 
@@ -45,7 +43,7 @@ const techs: Tech[] = [
   },
   {
     name: "AWS / Azure",
-    icons: [{ Icon: SiAmazon, color: "#FF9900" }, { Icon: SiMicrosoftazure, color: "#0078D4" }],
+    icons: [{ Icon: FaAws, color: "#FF9900" }, { Icon: FaMicrosoft, color: "#0078D4" }],
     bg: "#232F3E",
     fg: "#FF9900",
   },
@@ -93,7 +91,7 @@ const techs: Tech[] = [
   },
   {
     name: "Power BI / Tableau",
-    icons: [{ Icon: SiTableau, color: "#E97627" }],
+    icons: [{ Icon: FaChartBar, color: "#F2C811" }],
     bg: "#F2C811",
     fg: "#1a1a1a",
   },
