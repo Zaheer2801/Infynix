@@ -231,3 +231,43 @@
     0 8px 24px -4px color-mix(in oklab, var(--primary) 55%, transparent),
     0 0 28px color-mix(in oklab, var(--primary) 45%, transparent);
 }
+
+/* Tech marquee */
+@keyframes tech-marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes tech-marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.tech-marquee {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  animation: tech-marquee-left 40s linear infinite;
+  will-change: transform;
+}
+.tech-marquee.reverse {
+  animation-name: tech-marquee-right;
+}
+.tech-marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+.tech-marquee-mask:hover .tech-marquee,
+.tech-marquee-mask:focus-within .tech-marquee {
+  animation-play-state: paused;
+}
+.tech-tile {
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.tech-tile:hover,
+.tech-tile.is-active {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklab, var(--tech-fg, var(--primary)) 60%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--tech-fg, var(--primary)) 35%, transparent),
+    0 12px 32px -8px color-mix(in oklab, var(--tech-fg, var(--primary)) 55%, transparent),
+    0 0 36px color-mix(in oklab, var(--tech-fg, var(--primary)) 45%, transparent);
+}
