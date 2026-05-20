@@ -1,22 +1,116 @@
+import type { IconType } from "react-icons";
+import {
+  SiReact,
+  SiNextdotjs,
+  SiPython,
+  SiFastapi,
+  SiDocker,
+  SiKubernetes,
+  SiLangchain,
+  SiOpenai,
+  SiSnowflake,
+  SiFlutter,
+  SiSwift,
+  SiPostgresql,
+  SiMongodb,
+  SiApachespark,
+  SiSalesforce,
+  SiSap,
+} from "react-icons/si";
+import { FaAws, FaMicrosoft, FaChartBar } from "react-icons/fa";
 import { Reveal } from "../Reveal";
 import { SectionLabel } from "../SectionLabel";
 
-const techs = [
-  "React / Next.js",
-  "Python / FastAPI",
-  "AWS / Azure",
-  "Docker / K8s",
-  "LangChain / LLMs",
-  "Snowflake",
-  "Flutter / Swift",
-  "PostgreSQL / MongoDB",
-  "Apache Spark",
-  "Salesforce",
-  "Power BI / Tableau",
-  "SAP / ERP",
+type Tech = {
+  name: string;
+  icons: { Icon: IconType; color: string }[];
+  bg: string; // hover background (brand)
+  fg: string; // hover foreground (text/icons)
+};
+
+const techs: Tech[] = [
+  {
+    name: "React / Next.js",
+    icons: [{ Icon: SiReact, color: "#61DAFB" }, { Icon: SiNextdotjs, color: "#ffffff" }],
+    bg: "#20232a",
+    fg: "#61DAFB",
+  },
+  {
+    name: "Python / FastAPI",
+    icons: [{ Icon: SiPython, color: "#FFD43B" }, { Icon: SiFastapi, color: "#009688" }],
+    bg: "#1e3a5f",
+    fg: "#FFD43B",
+  },
+  {
+    name: "AWS / Azure",
+    icons: [{ Icon: FaAws, color: "#FF9900" }, { Icon: FaMicrosoft, color: "#0078D4" }],
+    bg: "#232F3E",
+    fg: "#FF9900",
+  },
+  {
+    name: "Docker / K8s",
+    icons: [{ Icon: SiDocker, color: "#2496ED" }, { Icon: SiKubernetes, color: "#326CE5" }],
+    bg: "#0db7ed",
+    fg: "#ffffff",
+  },
+  {
+    name: "LangChain / LLMs",
+    icons: [{ Icon: SiLangchain, color: "#1C3C3C" }, { Icon: SiOpenai, color: "#ffffff" }],
+    bg: "#1C3C3C",
+    fg: "#ffffff",
+  },
+  {
+    name: "Snowflake",
+    icons: [{ Icon: SiSnowflake, color: "#29B5E8" }],
+    bg: "#29B5E8",
+    fg: "#ffffff",
+  },
+  {
+    name: "Flutter / Swift",
+    icons: [{ Icon: SiFlutter, color: "#02569B" }, { Icon: SiSwift, color: "#F05138" }],
+    bg: "#02569B",
+    fg: "#ffffff",
+  },
+  {
+    name: "PostgreSQL / MongoDB",
+    icons: [{ Icon: SiPostgresql, color: "#4169E1" }, { Icon: SiMongodb, color: "#47A248" }],
+    bg: "#336791",
+    fg: "#ffffff",
+  },
+  {
+    name: "Apache Spark",
+    icons: [{ Icon: SiApachespark, color: "#E25A1C" }],
+    bg: "#E25A1C",
+    fg: "#ffffff",
+  },
+  {
+    name: "Salesforce",
+    icons: [{ Icon: SiSalesforce, color: "#00A1E0" }],
+    bg: "#00A1E0",
+    fg: "#ffffff",
+  },
+  {
+    name: "Power BI / Tableau",
+    icons: [{ Icon: FaChartBar, color: "#F2C811" }],
+    bg: "#F2C811",
+    fg: "#1a1a1a",
+  },
+  {
+    name: "SAP / ERP",
+    icons: [{ Icon: SiSap, color: "#0FAAFF" }],
+    bg: "#0FAAFF",
+    fg: "#ffffff",
+  },
 ];
 
 export function TechStack() {
+  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   return (
     <section className="bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24">
@@ -32,12 +126,31 @@ export function TechStack() {
 
         <div className="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-border border border-border">
           {techs.map((t, i) => (
-            <Reveal key={t} delay={i * 30}>
-              <div className="bg-background p-6 flex items-center gap-4 h-full hover:bg-secondary transition-colors">
-                <span className="inline-flex h-10 w-10 items-center justify-center bg-primary/10 text-primary text-sm font-bold">
-                  {t.charAt(0)}
+            <Reveal key={t.name} delay={i * 30}>
+              <div
+                onMouseEnter={handleMove}
+                onMouseMove={handleMove}
+                className="tech-card group relative overflow-hidden bg-background p-6 flex items-center gap-4 h-full transition-colors duration-500"
+                style={
+                  {
+                    "--tech-bg": t.bg,
+                    "--tech-fg": t.fg,
+                  } as React.CSSProperties
+                }
+              >
+                <span className="relative z-10 inline-flex h-10 items-center gap-2">
+                  {t.icons.map(({ Icon, color }, idx) => (
+                    <Icon
+                      key={idx}
+                      size={28}
+                      className="tech-icon transition-colors duration-500"
+                      style={{ color }}
+                    />
+                  ))}
                 </span>
-                <span className="text-sm font-medium text-foreground">{t}</span>
+                <span className="relative z-10 text-sm font-medium text-foreground transition-colors duration-500 group-hover:text-[color:var(--tech-fg)]">
+                  {t.name}
+                </span>
               </div>
             </Reveal>
           ))}

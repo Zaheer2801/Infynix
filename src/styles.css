@@ -188,3 +188,23 @@
   width: 250%;
   height: 250%;
 }
+
+/* Tech card — brand-color ripple reveal from cursor */
+.tech-card::before {
+  content: "";
+  position: absolute;
+  left: var(--mx, 50%);
+  top: var(--my, 50%);
+  width: 0;
+  height: 0;
+  background: var(--tech-bg, var(--primary));
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  transition: width 0.55s ease, height 0.55s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.tech-card:hover::before {
+  width: 250%;
+  height: 250%;
+}
