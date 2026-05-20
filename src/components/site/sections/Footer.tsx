@@ -44,18 +44,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <img
-                src={logoMark}
-                alt="Iresh Technologies"
-                width={36}
-                height={36}
-                loading="lazy"
-                className="h-9 w-9 object-contain"
-              />
-              <span className="font-bold tracking-tight text-base leading-none">
-                IRESH <span className="text-primary">TECHNOLOGIES</span>
-              </span>
+            <div className="font-bold tracking-tight text-base">
+              IRESH <span className="text-primary">TECHNOLOGIES</span>
             </div>
             <p className="mt-5 text-sm text-dark-muted leading-relaxed max-w-sm">
               Your strategic partner for IT staffing, AI solutions, and digital transformation. 15+
