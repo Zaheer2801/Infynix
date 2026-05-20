@@ -1,5 +1,6 @@
 import { Reveal } from "../Reveal";
 import { IconArrowRight } from "../Icons";
+import { openContactModal } from "@/lib/contact-modal";
 
 const stats = [
   ["15+", "Years Experience"],
@@ -40,12 +41,12 @@ export function Hero() {
             >
               Explore Services <IconArrowRight width={16} height={16} />
             </a>
-            <a
-              href="#contact"
+            <button
+              onClick={openContactModal}
               className="inline-flex items-center gap-2 border border-dark-border text-dark-foreground hover:border-primary hover:text-primary px-7 py-3.5 text-sm font-semibold transition-colors"
             >
               Talk to an Expert
-            </a>
+            </button>
           </div>
         </Reveal>
         <Reveal delay={320}>

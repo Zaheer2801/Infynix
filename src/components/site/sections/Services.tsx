@@ -10,6 +10,7 @@ import {
   IconBuilding,
   IconArrowRight,
 } from "../Icons";
+import { openContactModal } from "@/lib/contact-modal";
 
 type Service = {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
@@ -90,12 +91,12 @@ export function Services() {
                       </span>
                     ))}
                   </div>
-                  <a
-                    href="#contact"
+                  <button
+                    onClick={openContactModal}
                     className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-hover"
                   >
                     Read More <IconArrowRight width={14} height={14} />
-                  </a>
+                  </button>
                 </article>
               </Reveal>
             );
