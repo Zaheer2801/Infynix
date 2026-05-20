@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { IconType } from "react-icons";
 import {
   SiReact,
@@ -117,11 +118,35 @@ const techs: Tech[] = [
 ];
 
 export function TechStack() {
-  const handleMove = (e: React.MouseEvent<HTMLElement>) => {
-    const el = e.currentTarget;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
+  const [active, setActive] = useState<string | null>(null);
+  const mid = Math.ceil(techs.length / 2);
+  const rowA = techs.slice(0, mid);
+  const rowB = techs.slice(mid);
+
+  const renderTile = (t: Tech, key: string) => {
+    const Icons = t.icons;
+    const isActive = active === key;
+    return (
+      <button
+        key={key}
+        type="button"
+        onClick={() => setActive((cur) => (cur === key ? null : key))}
+        onMouseEnter={(e) => (e.currentTarget.closest(".tech-marquee") as HTMLElement | null)?.style.setProperty("animation-play-state", "paused")}
+        onMouseLeave={(e) => (e.currentTarget.closest(".tech-marquee") as HTMLElement | null)?.style.removeProperty("animation-play-state")}
+        className={`tech-tile group relative shrink-0 w-[280px] text-left bg-white p-6 rounded-2xl border border-border shadow-[0_1px_2px_rgba(0,0,0,0.03)] ${isActive ? "is-active" : ""}`}
+        style={{ ["--tech-fg" as any]: t.fg === "#ffffff" ? t.bg : t.fg } as React.CSSProperties}
+      >
+        <span className="inline-flex items-center gap-2.5">
+          {Icons.map(({ Icon, color }, idx) => (
+            <Icon key={idx} size={32} style={{ color }} />
+          ))}
+        </span>
+        <h3 className="mt-4 text-base font-semibold text-foreground">{t.name}</h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+          {t.desc}
+        </p>
+      </button>
+    );
   };
 
   return (
@@ -137,39 +162,17 @@ export function TechStack() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {techs.map((t, i) => (
-            <Reveal key={t.name} delay={i * 30}>
-              <div
-                onMouseEnter={handleMove}
-                onMouseMove={handleMove}
-                className="tech-card group relative overflow-hidden bg-white p-7 rounded-2xl border border-border h-full flex flex-col min-h-[240px] shadow-[0_1px_2px_rgba(0,0,0,0.02)] hover:shadow-xl hover:-translate-y-1 transition-all duration-500"
-                style={
-                  {
-                    "--tech-bg": t.bg,
-                    "--tech-fg": t.fg,
-                  } as React.CSSProperties
-                }
-              >
-                <span className="relative z-10 inline-flex items-center gap-2.5">
-                  {t.icons.map(({ Icon, color }, idx) => (
-                    <Icon
-                      key={idx}
-                      size={34}
-                      className="tech-icon transition-colors duration-500"
-                      style={{ color }}
-                    />
-                  ))}
-                </span>
-                <h3 className="relative z-10 mt-5 text-base font-semibold text-foreground transition-colors duration-500 group-hover:text-[color:var(--tech-fg)]">
-                  {t.name}
-                </h3>
-                <p className="relative z-10 mt-2 text-sm leading-relaxed text-muted-foreground transition-colors duration-500 group-hover:text-white/90">
-                  {t.desc}
-                </p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="mt-12 space-y-5 tech-marquee-mask">
+          <div className="overflow-hidden">
+            <div className="tech-marquee">
+              {[...rowA, ...rowA].map((t, i) => renderTile(t, `a-${i}-${t.name}`))}
+            </div>
+          </div>
+          <div className="overflow-hidden">
+            <div className="tech-marquee reverse">
+              {[...rowB, ...rowB].map((t, i) => renderTile(t, `b-${i}-${t.name}`))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
