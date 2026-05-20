@@ -1,26 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/site/Navbar";
+import { Hero } from "@/components/site/sections/Hero";
+import { About } from "@/components/site/sections/About";
+import { Stats } from "@/components/site/sections/Stats";
+import { Services } from "@/components/site/sections/Services";
+import { Industries } from "@/components/site/sections/Industries";
+import { Process } from "@/components/site/sections/Process";
+import { TechStack } from "@/components/site/sections/TechStack";
+import { Testimonials } from "@/components/site/sections/Testimonials";
+import { CtaBanner } from "@/components/site/sections/CtaBanner";
+import { Contact } from "@/components/site/sections/Contact";
+import { Footer } from "@/components/site/sections/Footer";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Iresh Technologies — IT Staffing, AI & Digital Transformation" },
+      {
+        name: "description",
+        content:
+          "Enterprise IT staffing, AI solutions, and digital transformation services. 15+ years, 2500+ placements, 350+ enterprise clients.",
+      },
+      { property: "og:title", content: "Iresh Technologies — Smart Tech for Modern Enterprise" },
+      {
+        property: "og:description",
+        content:
+          "Trusted IT staffing and digital transformation partner delivering enterprise-grade solutions.",
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Stats />
+        <Services />
+        <Industries />
+        <Process />
+        <TechStack />
+        <Testimonials />
+        <CtaBanner />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
