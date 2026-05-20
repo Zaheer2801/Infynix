@@ -29,12 +29,12 @@ export function About() {
             need to win — combining domain expertise, innovative tools, and a relentless commitment
             to quality.
           </p>
-          <a
-            href="#contact"
+          <button
+            onClick={openContactModal}
             className="inline-flex items-center gap-2 mt-8 text-sm font-semibold text-primary hover:text-primary-hover"
           >
             Partner With Us <IconArrowRight width={16} height={16} />
-          </a>
+          </button>
         </Reveal>
 
         <Reveal delay={120}>
