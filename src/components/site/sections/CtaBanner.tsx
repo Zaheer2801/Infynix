@@ -4,7 +4,13 @@ import { openContactModal } from "@/lib/contact-modal";
 
 export function CtaBanner() {
   return (
-    <section className="bg-dark text-dark-foreground">
+    <section
+      className="text-dark-foreground"
+      style={{
+        background:
+          "linear-gradient(160deg, #1e3a8a 0%, #1d4ed8 50%, #1f6b6a 100%)",
+      }}
+    >
       <div className="mx-auto max-w-4xl px-6 py-24 text-center">
         <Reveal>
           <h2 className="text-4xl md:text-5xl font-bold leading-tight">
