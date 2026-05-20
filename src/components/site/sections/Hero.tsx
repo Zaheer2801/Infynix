@@ -11,7 +11,17 @@ const stats = [
 
 export function Hero() {
   return (
-    <section id="top" className="bg-dark text-dark-foreground">
+    <section
+      id="top"
+      className="relative text-dark-foreground overflow-hidden"
+      style={{
+        background:
+          "linear-gradient(180deg, #1e3a8a 0%, #1d4ed8 35%, #1e4d8a 65%, #1f6b6a 90%, #2e8a6a 100%)",
+      }}
+    >
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32" style={{
+        background: "linear-gradient(180deg, transparent, rgba(46,138,106,0.35))",
+      }} />
       <div className="mx-auto max-w-7xl px-6 pt-24 pb-28">
         <Reveal>
           <div className="flex items-center gap-3 mb-6">
