@@ -1,5 +1,20 @@
 import { IconLinkedIn, IconX, IconFacebook, IconYoutube } from "../Icons";
 import { MapPin, Phone, Mail, Clock, Globe, ShieldCheck, BadgeCheck } from "lucide-react";
+import type { ReactNode } from "react";
+
+function ContactCard({ icon, title, children }: { icon: ReactNode; title: string; children: ReactNode }) {
+  return (
+    <div className="rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-5 hover:border-primary/50 transition-colors">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-primary border border-primary/30">
+          {icon}
+        </span>
+        <div className="text-xs uppercase tracking-[0.18em] text-white font-semibold">{title}</div>
+      </div>
+      {children}
+    </div>
+  );
+}
 
 
 const cols = [
