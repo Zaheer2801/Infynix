@@ -232,7 +232,7 @@
     0 0 28px color-mix(in oklab, var(--primary) 45%, transparent);
 }
 
-/* Tech marquee */
+/* Tech marquee — row scrolls continuously, hovered tile pins via counter-animation */
 @keyframes tech-marquee-left {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -241,11 +241,19 @@
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
 }
+@keyframes tech-counter-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+@keyframes tech-counter-right {
+  from { transform: translateX(50%); }
+  to { transform: translateX(0); }
+}
 .tech-marquee {
   display: flex;
   width: max-content;
   gap: 1.25rem;
-  animation: tech-marquee-left 40s linear infinite;
+  animation: tech-marquee-left 50s linear infinite;
   will-change: transform;
 }
 .tech-marquee.reverse {
@@ -255,19 +263,56 @@
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
-.tech-marquee-mask:hover .tech-marquee,
-.tech-marquee-mask:focus-within .tech-marquee {
-  animation-play-state: paused;
-}
+
+/* Tile — ripple reveal in brand color on hover/active */
 .tech-tile {
+  position: relative;
+  overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
+.tech-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--tech-bg, var(--primary));
+  border-radius: inherit;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.45s ease, transform 0.6s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+.tech-tile > * { position: relative; z-index: 1; }
+
 .tech-tile:hover,
 .tech-tile.is-active {
-  transform: translateY(-4px);
-  border-color: color-mix(in oklab, var(--tech-fg, var(--primary)) 60%, transparent);
+  z-index: 5;
+  border-color: color-mix(in oklab, var(--tech-bg, var(--primary)) 70%, transparent);
   box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--tech-fg, var(--primary)) 35%, transparent),
-    0 12px 32px -8px color-mix(in oklab, var(--tech-fg, var(--primary)) 55%, transparent),
-    0 0 36px color-mix(in oklab, var(--tech-fg, var(--primary)) 45%, transparent);
+    0 0 0 1px color-mix(in oklab, var(--tech-bg, var(--primary)) 45%, transparent),
+    0 16px 40px -10px color-mix(in oklab, var(--tech-bg, var(--primary)) 60%, transparent),
+    0 0 48px color-mix(in oklab, var(--tech-bg, var(--primary)) 50%, transparent);
+}
+.tech-tile:hover::before,
+.tech-tile.is-active::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.tech-tile:hover .tech-name,
+.tech-tile.is-active .tech-name {
+  color: var(--tech-fg, #fff);
+}
+.tech-tile:hover .tech-desc,
+.tech-tile.is-active .tech-desc {
+  color: color-mix(in oklab, var(--tech-fg, #fff) 92%, transparent);
+}
+
+/* Counter-animate the hovered/active tile so it visually pins while the row keeps moving */
+.tech-marquee .tech-tile:hover,
+.tech-marquee .tech-tile.is-active {
+  animation: tech-counter-left 50s linear infinite;
+}
+.tech-marquee.reverse .tech-tile:hover,
+.tech-marquee.reverse .tech-tile.is-active {
+  animation-name: tech-counter-right;
 }

@@ -131,18 +131,16 @@ export function TechStack() {
         key={key}
         type="button"
         onClick={() => setActive((cur) => (cur === key ? null : key))}
-        onMouseEnter={(e) => (e.currentTarget.closest(".tech-marquee") as HTMLElement | null)?.style.setProperty("animation-play-state", "paused")}
-        onMouseLeave={(e) => (e.currentTarget.closest(".tech-marquee") as HTMLElement | null)?.style.removeProperty("animation-play-state")}
-        className={`tech-tile group relative shrink-0 w-[280px] text-left bg-white p-6 rounded-2xl border border-border shadow-[0_1px_2px_rgba(0,0,0,0.03)] ${isActive ? "is-active" : ""}`}
-        style={{ ["--tech-fg" as any]: t.fg === "#ffffff" ? t.bg : t.fg } as React.CSSProperties}
+        className={`tech-tile shrink-0 w-[280px] text-left bg-white p-6 rounded-2xl border border-border shadow-[0_1px_2px_rgba(0,0,0,0.03)] ${isActive ? "is-active" : ""}`}
+        style={{ ["--tech-bg" as any]: t.bg, ["--tech-fg" as any]: t.fg } as React.CSSProperties}
       >
         <span className="inline-flex items-center gap-2.5">
           {Icons.map(({ Icon, color }, idx) => (
             <Icon key={idx} size={32} style={{ color }} />
           ))}
         </span>
-        <h3 className="mt-4 text-base font-semibold text-foreground">{t.name}</h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground line-clamp-3">
+        <h3 className="tech-name mt-4 text-base font-semibold text-foreground transition-colors duration-300">{t.name}</h3>
+        <p className="tech-desc mt-1.5 text-sm leading-relaxed text-muted-foreground line-clamp-3 transition-colors duration-300">
           {t.desc}
         </p>
       </button>
