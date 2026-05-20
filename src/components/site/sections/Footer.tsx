@@ -1,5 +1,7 @@
-import { MapPin, Mail, Phone, ShieldCheck, BadgeCheck, Linkedin, Facebook, Youtube } from "lucide-react";
+import { MapPin, Mail, Phone, Linkedin, Facebook, Youtube } from "lucide-react";
 import type { SVGProps } from "react";
+import eVerifyLogo from "@/assets/e-verify.png";
+import dunsLogo from "@/assets/duns-registered.png";
 
 const IconX = (p: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -82,12 +84,21 @@ export function Footer() {
                 <a href="tel:2192490009" className="hover:text-dark-foreground transition-colors">(219) 249-0009</a>
               </li>
             </ul>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold border border-primary/50 text-primary bg-primary/10">
-                <ShieldCheck size={13} /> E-Verify Certified
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold border border-accent/50 bg-accent/10" style={{ color: "var(--accent)" }}>
-                <BadgeCheck size={13} /> DUNS Registered
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="https://www.e-verify.gov/e-verify-employer-search"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="E-Verify Employer Search"
+                className="cert-badge inline-flex items-center justify-center rounded-md bg-white px-2.5 py-1.5 border border-dark-border transition-all duration-300"
+              >
+                <img src={eVerifyLogo} alt="E-Verify" className="h-6 w-auto object-contain" />
+              </a>
+              <span
+                aria-label="D-U-N-S Registered"
+                className="cert-badge inline-flex items-center justify-center rounded-md bg-white px-2.5 py-1.5 border border-dark-border transition-all duration-300"
+              >
+                <img src={dunsLogo} alt="D-U-N-S Registered" className="h-7 w-auto object-contain" />
               </span>
             </div>
           </div>
