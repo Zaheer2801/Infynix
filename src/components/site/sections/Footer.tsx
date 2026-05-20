@@ -1,5 +1,5 @@
 import { IconLinkedIn, IconX, IconFacebook, IconYoutube } from "../Icons";
-import logoMark from "@/assets/logo-mark.png";
+
 
 const cols = [
   {
