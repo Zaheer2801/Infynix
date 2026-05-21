@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { IconMenu, IconClose } from "./Icons";
 import { openContactModal } from "@/lib/contact-modal";
 
-
 const links = [
-  { label: "Services", href: "#services" },
-  { label: "Industries", href: "#industries" },
-  { label: "Solutions", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Careers", href: "#footer" },
+  { label: "Services", href: "/#services" },
+  { label: "Industries", href: "/#industries" },
+  { label: "Solutions", href: "/#process" },
+  { label: "About", href: "/#about" },
+  { label: "Careers", href: "/careers" },
   { label: "Contact", href: "#contact", action: "contact" as const },
 ];
 
