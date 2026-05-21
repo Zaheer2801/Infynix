@@ -241,14 +241,6 @@
   from { transform: translateX(-50%); }
   to { transform: translateX(0); }
 }
-@keyframes tech-counter-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(50%); }
-}
-@keyframes tech-counter-right {
-  from { transform: translateX(50%); }
-  to { transform: translateX(0); }
-}
 .tech-marquee {
   display: flex;
   width: max-content;
@@ -258,6 +250,11 @@
 }
 .tech-marquee.reverse {
   animation-name: tech-marquee-right;
+}
+/* Pause the whole row when any tile is hovered or active — smooth & predictable */
+.tech-marquee:hover,
+.tech-marquee:has(.tech-tile.is-active) {
+  animation-play-state: paused;
 }
 .tech-marquee-mask {
   mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
@@ -305,14 +302,4 @@
 .tech-tile:hover .tech-desc,
 .tech-tile.is-active .tech-desc {
   color: color-mix(in oklab, var(--tech-fg, #fff) 92%, transparent);
-}
-
-/* Counter-animate the hovered/active tile so it visually pins while the row keeps moving */
-.tech-marquee .tech-tile:hover,
-.tech-marquee .tech-tile.is-active {
-  animation: tech-counter-left 50s linear infinite;
-}
-.tech-marquee.reverse .tech-tile:hover,
-.tech-marquee.reverse .tech-tile.is-active {
-  animation-name: tech-counter-right;
 }
