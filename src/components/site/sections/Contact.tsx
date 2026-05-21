@@ -208,35 +208,25 @@ export function Contact() {
         {/* INFO ROW */}
         <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <InfoCard icon={<Phone size={18} />} title="Phone">
-            <div className="flex items-center gap-3 pt-1">
-              {phones.map((p) => (
-                <a
-                  key={p.label}
-                  href={`tel:${p.value.replace(/\D/g, "")}`}
-                  aria-label={`${p.label} ${p.value}`}
-                  title={`${p.label}: ${p.value}`}
-                  className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
-                >
-                  <Phone size={16} />
-                </a>
-              ))}
-            </div>
+            <a
+              href={`tel:${phones[0].value.replace(/\D/g, "")}`}
+              aria-label="Call us"
+              title="Call us"
+              className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
+            >
+              <Phone size={16} />
+            </a>
           </InfoCard>
 
           <InfoCard icon={<Mail size={18} />} title="Email">
-            <div className="flex items-center gap-3 pt-1">
-              {emails.map((e) => (
-                <a
-                  key={e.label}
-                  href={`mailto:${e.value}`}
-                  aria-label={`${e.label} ${e.value}`}
-                  title={`${e.label}: ${e.value}`}
-                  className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
-                >
-                  <Mail size={16} />
-                </a>
-              ))}
-            </div>
+            <a
+              href={`mailto:${emails[0].value}`}
+              aria-label="Email us"
+              title="Email us"
+              className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
+            >
+              <Mail size={16} />
+            </a>
           </InfoCard>
 
           <InfoCard icon={<Clock size={18} />} title="Business Hours">
