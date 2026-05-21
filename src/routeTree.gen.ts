@@ -17,6 +17,7 @@ import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as CareersJobIdRouteImport } from './routes/careers.$jobId'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
   id: '/case-studies',
@@ -58,12 +59,18 @@ const CareersJobIdRoute = CareersJobIdRouteImport.update({
   path: '/$jobId',
   getParentRoute: () => CareersRoute,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
@@ -71,9 +78,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
@@ -82,9 +90,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/case-studies'
+    | '/blog/$slug'
     | '/careers/$jobId'
     | '/case-studies/$slug'
     | '/industries/$slug'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/case-studies'
+    | '/blog/$slug'
     | '/careers/$jobId'
     | '/case-studies/$slug'
     | '/industries/$slug'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/case-studies'
+    | '/blog/$slug'
     | '/careers/$jobId'
     | '/case-studies/$slug'
     | '/industries/$slug'
@@ -125,7 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CareersRoute: typeof CareersRouteWithChildren
   CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
   IndustriesSlugRoute: typeof IndustriesSlugRoute
@@ -190,8 +202,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersJobIdRouteImport
       parentRoute: typeof CareersRoute
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface CareersRouteChildren {
   CareersJobIdRoute: typeof CareersJobIdRoute
@@ -218,7 +247,7 @@ const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   CareersRoute: CareersRouteWithChildren,
   CaseStudiesRoute: CaseStudiesRouteWithChildren,
   IndustriesSlugRoute: IndustriesSlugRoute,
