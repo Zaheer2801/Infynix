@@ -13,6 +13,7 @@ import { Route as CareersRouteImport } from './routes/careers'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
+import { Route as CareersJobIdRouteImport } from './routes/careers.$jobId'
 
 const CareersRoute = CareersRouteImport.update({
   id: '/careers',
@@ -34,37 +35,61 @@ const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
   path: '/industries/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CareersJobIdRoute = CareersJobIdRouteImport.update({
+  id: '/$jobId',
+  path: '/$jobId',
+  getParentRoute: () => CareersRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
+  '/careers/$jobId': typeof CareersJobIdRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
+  '/careers/$jobId': typeof CareersJobIdRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/careers': typeof CareersRoute
+  '/careers': typeof CareersRouteWithChildren
+  '/careers/$jobId': typeof CareersJobIdRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/careers' | '/industries/$slug' | '/services/$slug'
+  fullPaths:
+    | '/'
+    | '/careers'
+    | '/careers/$jobId'
+    | '/industries/$slug'
+    | '/services/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/careers' | '/industries/$slug' | '/services/$slug'
-  id: '__root__' | '/' | '/careers' | '/industries/$slug' | '/services/$slug'
+  to:
+    | '/'
+    | '/careers'
+    | '/careers/$jobId'
+    | '/industries/$slug'
+    | '/services/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/careers'
+    | '/careers/$jobId'
+    | '/industries/$slug'
+    | '/services/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CareersRoute: typeof CareersRoute
+  CareersRoute: typeof CareersRouteWithChildren
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
 }
@@ -99,12 +124,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndustriesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/careers/$jobId': {
+      id: '/careers/$jobId'
+      path: '/$jobId'
+      fullPath: '/careers/$jobId'
+      preLoaderRoute: typeof CareersJobIdRouteImport
+      parentRoute: typeof CareersRoute
+    }
   }
 }
 
+interface CareersRouteChildren {
+  CareersJobIdRoute: typeof CareersJobIdRoute
+}
+
+const CareersRouteChildren: CareersRouteChildren = {
+  CareersJobIdRoute: CareersJobIdRoute,
+}
+
+const CareersRouteWithChildren =
+  CareersRoute._addFileChildren(CareersRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CareersRoute: CareersRoute,
+  CareersRoute: CareersRouteWithChildren,
   IndustriesSlugRoute: IndustriesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
 }
