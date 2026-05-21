@@ -1,7 +1,9 @@
 import { MapPin, Mail, Phone, Linkedin, Facebook, Youtube } from "lucide-react";
 import type { SVGProps } from "react";
+import { Link } from "@tanstack/react-router";
 import eVerifyLogo from "@/assets/e-verify.png";
 import dunsLogo from "@/assets/duns-registered.png";
+import { openContactModal } from "@/lib/contact-modal";
 
 const IconX = (p: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -9,10 +11,42 @@ const IconX = (p: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-const cols = [
-  { title: "Services", items: ["IT Staffing", "AI & ML Solutions", "Cloud & DevOps", "Web Development", "Data Analytics", "ERP Solutions"] },
-  { title: "Industries", items: ["Banking & Finance", "Healthcare", "Manufacturing", "Retail", "Telecommunications", "Government"] },
-  { title: "Company", items: ["About Us", "Careers", "Case Studies", "Blog", "Contact", "Privacy Policy", "Terms & Conditions"] },
+type FooterLink = { label: string; to?: string; params?: Record<string, string>; action?: "contact" };
+const cols: { title: string; items: FooterLink[] }[] = [
+  {
+    title: "Services",
+    items: [
+      { label: "IT Staffing", to: "/services/$slug", params: { slug: "it-staffing" } },
+      { label: "AI & ML Solutions", to: "/services/$slug", params: { slug: "ai-ml" } },
+      { label: "Cloud & DevOps", to: "/services/$slug", params: { slug: "cloud-devops" } },
+      { label: "Web Development", to: "/services/$slug", params: { slug: "web-mobile" } },
+      { label: "Data Analytics", to: "/services/$slug", params: { slug: "data-analytics" } },
+      { label: "ERP Solutions", to: "/services/$slug", params: { slug: "enterprise-erp" } },
+    ],
+  },
+  {
+    title: "Industries",
+    items: [
+      { label: "Banking & Finance", to: "/industries/$slug", params: { slug: "banking" } },
+      { label: "Healthcare", to: "/industries/$slug", params: { slug: "healthcare" } },
+      { label: "Manufacturing", to: "/industries/$slug", params: { slug: "manufacturing" } },
+      { label: "Retail", to: "/industries/$slug", params: { slug: "retail" } },
+      { label: "Telecommunications", to: "/industries/$slug", params: { slug: "telecom" } },
+      { label: "Government", to: "/industries/$slug", params: { slug: "government" } },
+    ],
+  },
+  {
+    title: "Company",
+    items: [
+      { label: "About Us", to: "/about" },
+      { label: "Careers", to: "/careers" },
+      { label: "Case Studies", to: "/case-studies" },
+      { label: "Blog", to: "/blog" },
+      { label: "Contact", action: "contact" },
+      { label: "Privacy Policy", to: "/" },
+      { label: "Terms & Conditions", to: "/" },
+    ],
+  },
 ];
 
 const socials = [
@@ -58,10 +92,23 @@ export function Footer() {
               </div>
               <ul className="mt-5 space-y-3">
                 {c.items.map((i) => (
-                  <li key={i}>
-                    <a href="#" className="text-sm text-dark-muted hover:text-dark-foreground transition-colors">
-                      {i}
-                    </a>
+                  <li key={i.label}>
+                    {i.action === "contact" ? (
+                      <button
+                        onClick={openContactModal}
+                        className="text-sm text-dark-muted hover:text-dark-foreground transition-colors text-left"
+                      >
+                        {i.label}
+                      </button>
+                    ) : (
+                      <Link
+                        to={i.to as string}
+                        params={i.params as never}
+                        className="text-sm text-dark-muted hover:text-dark-foreground transition-colors"
+                      >
+                        {i.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

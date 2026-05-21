@@ -1,4 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
+import { Link } from "@tanstack/react-router";
 import { Reveal } from "../Reveal";
 import { SectionLabel } from "../SectionLabel";
 import {
@@ -10,52 +11,22 @@ import {
   IconBuilding,
   IconArrowRight,
 } from "../Icons";
-import { openContactModal } from "@/lib/contact-modal";
 
 type Service = {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   title: string;
   desc: string;
   tags: string[];
+  slug: string;
 };
 
 const services: Service[] = [
-  {
-    icon: IconUsers,
-    title: "IT Staffing & Recruitment",
-    desc: "Precision matching of top-tier IT talent with organizational needs, ensuring long-term value, cultural alignment, and rapid onboarding.",
-    tags: ["Contract", "Full-Time", "C2C", "RPO"],
-  },
-  {
-    icon: IconCpu,
-    title: "AI & Machine Learning",
-    desc: "Enterprise-grade AI solutions — from NLP and computer vision to predictive analytics and agentic AI systems that automate complex workflows.",
-    tags: ["NLP", "Gen AI", "LLMs", "MLOps"],
-  },
-  {
-    icon: IconCloud,
-    title: "Cloud & DevOps",
-    desc: "Architect, migrate, and manage cloud-native infrastructure. We accelerate delivery pipelines with CI/CD, IaC, and container orchestration.",
-    tags: ["AWS", "Azure", "GCP", "Kubernetes"],
-  },
-  {
-    icon: IconCode,
-    title: "Web & Mobile Development",
-    desc: "Full-stack web and mobile applications built with modern frameworks, delivering performance, scalability, and exceptional user experiences.",
-    tags: ["React", "Flutter", "Node.js", "iOS/Android"],
-  },
-  {
-    icon: IconChart,
-    title: "Data Engineering & Analytics",
-    desc: "Transform raw data into strategic intelligence. We build data pipelines, warehouses, and visualization dashboards that drive real decisions.",
-    tags: ["Snowflake", "Databricks", "Power BI", "Spark"],
-  },
-  {
-    icon: IconBuilding,
-    title: "Enterprise Software & ERP",
-    desc: "Modernize operations with ERP, CRM, and custom enterprise applications. We integrate SAP, Salesforce, and bespoke solutions at scale.",
-    tags: ["SAP", "Salesforce", "ERP", "CRM"],
-  },
+  { icon: IconUsers, title: "IT Staffing & Recruitment", slug: "it-staffing", desc: "Precision matching of top-tier IT talent with organizational needs, ensuring long-term value, cultural alignment, and rapid onboarding.", tags: ["Contract", "Full-Time", "C2C", "RPO"] },
+  { icon: IconCpu, title: "AI & Machine Learning", slug: "ai-ml", desc: "Enterprise-grade AI solutions — from NLP and computer vision to predictive analytics and agentic AI systems that automate complex workflows.", tags: ["NLP", "Gen AI", "LLMs", "MLOps"] },
+  { icon: IconCloud, title: "Cloud & DevOps", slug: "cloud-devops", desc: "Architect, migrate, and manage cloud-native infrastructure. We accelerate delivery pipelines with CI/CD, IaC, and container orchestration.", tags: ["AWS", "Azure", "GCP", "Kubernetes"] },
+  { icon: IconCode, title: "Web & Mobile Development", slug: "web-mobile", desc: "Full-stack web and mobile applications built with modern frameworks, delivering performance, scalability, and exceptional user experiences.", tags: ["React", "Flutter", "Node.js", "iOS/Android"] },
+  { icon: IconChart, title: "Data Engineering & Analytics", slug: "data-analytics", desc: "Transform raw data into strategic intelligence. We build data pipelines, warehouses, and visualization dashboards that drive real decisions.", tags: ["Snowflake", "Databricks", "Power BI", "Spark"] },
+  { icon: IconBuilding, title: "Enterprise Software & ERP", slug: "enterprise-erp", desc: "Modernize operations with ERP, CRM, and custom enterprise applications. We integrate SAP, Salesforce, and bespoke solutions at scale.", tags: ["SAP", "Salesforce", "ERP", "CRM"] },
 ];
 
 export function Services() {
@@ -91,12 +62,13 @@ export function Services() {
                       </span>
                     ))}
                   </div>
-                  <button
-                    onClick={openContactModal}
+                  <Link
+                    to="/services/$slug"
+                    params={{ slug: s.slug }}
                     className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-hover"
                   >
                     Read More <IconArrowRight width={14} height={14} />
-                  </button>
+                  </Link>
                 </article>
               </Reveal>
             );
