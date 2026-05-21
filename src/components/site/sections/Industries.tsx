@@ -1,4 +1,5 @@
 import type { ComponentType, SVGProps } from "react";
+import { Link } from "@tanstack/react-router";
 import { Reveal } from "../Reveal";
 import { SectionLabel } from "../SectionLabel";
 import {
@@ -10,39 +11,15 @@ import {
   IconShield,
 } from "../Icons";
 
-type Item = { icon: ComponentType<SVGProps<SVGSVGElement>>; title: string; desc: string };
+type Item = { icon: ComponentType<SVGProps<SVGSVGElement>>; title: string; desc: string; slug: string };
 
 const items: Item[] = [
-  {
-    icon: IconBank,
-    title: "Banking & Financial Services",
-    desc: "Core banking modernization, risk analytics, compliance automation and fintech integrations for leading banks and insurers.",
-  },
-  {
-    icon: IconHeart,
-    title: "Healthcare & Life Sciences",
-    desc: "HIPAA-compliant solutions, EHR integrations, telehealth platforms, and clinical data management for healthcare leaders.",
-  },
-  {
-    icon: IconFactory,
-    title: "Manufacturing & Engineering",
-    desc: "Industrial IoT, smart factory solutions, supply chain optimization, and predictive maintenance for hi-end engineering firms.",
-  },
-  {
-    icon: IconCart,
-    title: "Retail & E-Commerce",
-    desc: "Omnichannel platforms, personalization engines, inventory management, and customer analytics for modern retailers.",
-  },
-  {
-    icon: IconAntenna,
-    title: "Telecom & Media",
-    desc: "Network management, OSS/BSS transformation, media streaming, and content delivery solutions for telcos and broadcasters.",
-  },
-  {
-    icon: IconShield,
-    title: "Government & Public Sector",
-    desc: "Secure, compliant digital government solutions — citizen portals, data governance, and smart city infrastructure.",
-  },
+  { icon: IconBank, slug: "banking", title: "Banking & Financial Services", desc: "Core banking modernization, risk analytics, compliance automation and fintech integrations for leading banks and insurers." },
+  { icon: IconHeart, slug: "healthcare", title: "Healthcare & Life Sciences", desc: "HIPAA-compliant solutions, EHR integrations, telehealth platforms, and clinical data management for healthcare leaders." },
+  { icon: IconFactory, slug: "manufacturing", title: "Manufacturing & Engineering", desc: "Industrial IoT, smart factory solutions, supply chain optimization, and predictive maintenance for hi-end engineering firms." },
+  { icon: IconCart, slug: "retail", title: "Retail & E-Commerce", desc: "Omnichannel platforms, personalization engines, inventory management, and customer analytics for modern retailers." },
+  { icon: IconAntenna, slug: "telecom", title: "Telecom & Media", desc: "Network management, OSS/BSS transformation, media streaming, and content delivery solutions for telcos and broadcasters." },
+  { icon: IconShield, slug: "government", title: "Government & Public Sector", desc: "Secure, compliant digital government solutions — citizen portals, data governance, and smart city infrastructure." },
 ];
 
 export function Industries() {
@@ -72,10 +49,12 @@ export function Industries() {
             const Icon = it.icon;
             return (
               <Reveal key={it.title} delay={i * 60}>
-                <article
+                <Link
+                  to="/industries/$slug"
+                  params={{ slug: it.slug }}
                   onMouseEnter={handleMove}
                   onMouseMove={handleMove}
-                  className="industry-card group relative overflow-hidden p-8 border border-border bg-card h-full isolate transition-colors duration-300"
+                  className="industry-card group relative overflow-hidden p-8 border border-border bg-card h-full isolate transition-colors duration-300 block"
                 >
                   <Icon className="relative z-10 text-primary transition-colors duration-500 group-hover:text-white" width={32} height={32} />
                   <h3 className="relative z-10 mt-6 text-lg font-semibold text-foreground transition-colors duration-500 group-hover:text-white">
@@ -84,7 +63,7 @@ export function Industries() {
                   <p className="relative z-10 mt-3 text-sm text-muted-foreground leading-relaxed transition-colors duration-500 group-hover:text-white/90">
                     {it.desc}
                   </p>
-                </article>
+                </Link>
               </Reveal>
             );
           })}
