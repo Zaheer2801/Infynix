@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
 import { Route as CareersJobIdRouteImport } from './routes/careers.$jobId'
 
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CareersRoute = CareersRouteImport.update({
   id: '/careers',
   path: '/careers',
@@ -44,6 +50,7 @@ const CareersJobIdRoute = CareersJobIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/careers': typeof CareersRouteWithChildren
+  '/case-studies': typeof CaseStudiesRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/careers': typeof CareersRouteWithChildren
+  '/case-studies': typeof CaseStudiesRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -59,6 +67,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/careers': typeof CareersRouteWithChildren
+  '/case-studies': typeof CaseStudiesRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -68,6 +77,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/careers'
+    | '/case-studies'
     | '/careers/$jobId'
     | '/industries/$slug'
     | '/services/$slug'
@@ -75,6 +85,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/careers'
+    | '/case-studies'
     | '/careers/$jobId'
     | '/industries/$slug'
     | '/services/$slug'
@@ -82,6 +93,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/careers'
+    | '/case-studies'
     | '/careers/$jobId'
     | '/industries/$slug'
     | '/services/$slug'
@@ -90,12 +102,20 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CareersRoute: typeof CareersRouteWithChildren
+  CaseStudiesRoute: typeof CaseStudiesRoute
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/careers': {
       id: '/careers'
       path: '/careers'
@@ -148,6 +168,7 @@ const CareersRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CareersRoute: CareersRouteWithChildren,
+  CaseStudiesRoute: CaseStudiesRoute,
   IndustriesSlugRoute: IndustriesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
 }
