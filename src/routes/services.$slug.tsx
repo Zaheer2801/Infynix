@@ -43,7 +43,8 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServicePage() {
-  const { service } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { service: (typeof services)[number] };
+  const { service } = data;
   return (
     <PageShell>
       <section className="bg-dark text-dark-foreground">
