@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -83,6 +84,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       {
+        rel: "icon",
+        href: "data:,",
+      },
+      {
         rel: "stylesheet",
         href: appCss,
       },
@@ -110,9 +115,21 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const isLoading = useRouterState({ select: (s) => s.isLoading });
 
   return (
     <QueryClientProvider client={queryClient}>
+      {isLoading && (
+        <div className="fixed top-0 left-0 right-0 h-[3px] z-[99999] pointer-events-none overflow-hidden">
+          <div
+            className="h-full w-full bg-gradient-to-r from-primary via-primary-hover to-emerald-400"
+            style={{
+              boxShadow: "0 0 8px var(--primary)",
+              animation: "shimmer-load 1.8s infinite ease-in-out"
+            }}
+          />
+        </div>
+      )}
       <Outlet />
     </QueryClientProvider>
   );

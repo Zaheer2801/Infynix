@@ -7,8 +7,8 @@ import { ArrowRight, MapPin, Briefcase, Clock, Check } from "lucide-react";
 export const Route = createFileRoute("/careers/$jobId")({
   head: ({ params }) => {
     const j = jobs.find((x) => x.id === params.jobId);
-    const title = j ? `${j.title} — Careers at Iresh` : "Career — Iresh Technologies";
-    const desc = j?.summary ?? "Open role at Iresh Technologies.";
+    const title = j ? `${j.title} — Careers at Infynix` : "Career — Infynix Tech Solutions";
+    const desc = j?.summary ?? "Open role at Infynix Tech Solutions.";
     return {
       meta: [
         { title },

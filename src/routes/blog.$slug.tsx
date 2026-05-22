@@ -7,13 +7,13 @@ import { ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/blog/$slug")({
   head: ({ params }) => {
     const p = blogPosts.find((x) => x.slug === params.slug);
-    const title = p ? `${p.title} — Iresh Blog` : "Blog — Iresh Technologies";
+    const title = p ? `${p.title} — Infynix Blog` : "Blog — Infynix Tech Solutions";
     return {
       meta: [
         { title },
-        { name: "description", content: p?.excerpt ?? "Iresh Technologies blog." },
+        { name: "description", content: p?.excerpt ?? "Infynix Tech Solutions blog." },
         { property: "og:title", content: title },
-        { property: "og:description", content: p?.excerpt ?? "Iresh Technologies blog." },
+        { property: "og:description", content: p?.excerpt ?? "Infynix Tech Solutions blog." },
       ],
     };
   },

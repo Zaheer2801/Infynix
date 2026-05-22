@@ -54,7 +54,7 @@ export function Industries() {
                   params={{ slug: it.slug }}
                   onMouseEnter={handleMove}
                   onMouseMove={handleMove}
-                  className="industry-card group relative overflow-hidden p-8 border border-border bg-card h-full isolate transition-colors duration-300 block"
+                  className="industry-card group relative overflow-hidden p-8 rounded-2xl border border-border bg-card h-full isolate shadow-[0_10px_30px_-6px_rgba(13,83,128,0.03)] hover:shadow-[0_20px_48px_-8px_rgba(13,83,128,0.08)] hover:-translate-y-1 duration-500 transition-all cursor-pointer block"
                 >
                   <Icon className="relative z-10 text-primary transition-colors duration-500 group-hover:text-white" width={32} height={32} />
                   <h3 className="relative z-10 mt-6 text-lg font-semibold text-foreground transition-colors duration-500 group-hover:text-white">

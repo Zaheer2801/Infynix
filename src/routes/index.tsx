@@ -16,17 +16,17 @@ import { ContactModal } from "@/components/site/ContactModal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Iresh Technologies — IT Staffing, AI & Digital Transformation" },
+      { title: "Infynix Tech Solutions — Premium IT Staffing, Production AI & Digital Transformation" },
       {
         name: "description",
         content:
-          "Enterprise IT staffing, AI solutions, and digital transformation services. 15+ years, 2500+ placements, 350+ enterprise clients.",
+          "Elite enterprise IT staffing models, production-grade Generative AI, cloud infrastructure, and end-to-end digital transformation services delivering quantitative ROI globally.",
       },
-      { property: "og:title", content: "Iresh Technologies — Smart Tech for Modern Enterprise" },
+      { property: "og:title", content: "Infynix Tech Solutions — Engineering Technical Excellence for High-Scale Enterprise" },
       {
         property: "og:description",
         content:
-          "Trusted IT staffing and digital transformation partner delivering enterprise-grade solutions.",
+          "A trusted strategic technology partner supplying pre-screened technical talent, robust cloud architectures, and secure compliance solutions to Fortune 500 and high-growth enterprises.",
       },
     ],
   }),

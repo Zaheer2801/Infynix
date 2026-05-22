@@ -6,10 +6,10 @@ import { ArrowRight, MapPin, Briefcase, Clock } from "lucide-react";
 export const Route = createFileRoute("/careers")({
   head: () => ({
     meta: [
-      { title: "Careers — Iresh Technologies" },
+      { title: "Careers — Infynix Tech Solutions" },
       { name: "description", content: "Open roles across AI, Cloud, Data, Web, Mobile, ERP and IT staffing." },
-      { property: "og:title", content: "Careers — Iresh Technologies" },
-      { property: "og:description", content: "Join Iresh Technologies. We're hiring across AI, Cloud, Data, Web, Mobile, ERP and IT staffing." },
+      { property: "og:title", content: "Careers — Infynix Tech Solutions" },
+      { property: "og:description", content: "Join Infynix Tech Solutions. We're hiring across AI, Cloud, Data, Web, Mobile, ERP and IT staffing." },
     ],
   }),
   component: CareersPage,

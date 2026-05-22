@@ -60,7 +60,7 @@ export function ContactModal() {
               Request a callback
             </h3>
             <p className="mt-4 text-sm md:text-base text-white/85 leading-relaxed max-w-md">
-              Iresh Technologies is a global IT services & digital transformation
+              Infynix Tech Solutions is a global IT services & digital transformation
               partner. Tell us about your project or staffing needs and our experts
               will reach out within one business day.
             </p>
@@ -156,7 +156,7 @@ export function ContactModal() {
                 <a className="text-primary underline" href="#">
                   Terms &amp; Conditions
                 </a>{" "}
-                of Iresh Technologies. <span className="text-red-500">*</span>
+                of Infynix Tech Solutions. <span className="text-red-500">*</span>
               </span>
             </label>
             <button

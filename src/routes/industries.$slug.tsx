@@ -7,8 +7,8 @@ import { ArrowRight, Check } from "lucide-react";
 export const Route = createFileRoute("/industries/$slug")({
   head: ({ params }) => {
     const it = industries.find((x) => x.slug === params.slug);
-    const title = it ? `${it.title} — Iresh Technologies` : "Industry — Iresh Technologies";
-    const desc = it?.tagline ?? "Industry solutions by Iresh Technologies.";
+    const title = it ? `${it.title} — Infynix Tech Solutions` : "Industry — Infynix Tech Solutions";
+    const desc = it?.tagline ?? "Industry solutions by Infynix Tech Solutions.";
     return {
       meta: [
         { title },

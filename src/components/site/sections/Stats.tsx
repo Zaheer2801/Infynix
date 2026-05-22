@@ -1,16 +1,24 @@
 import { Reveal } from "../Reveal";
 
 const stats = [
-  ["15+", "Years of Excellence"],
-  ["2500+", "Talent Placed"],
-  ["350+", "Enterprise Clients"],
-  ["95%", "Client Retention"],
+  ["15+", "Years of Technical Excellence"],
+  ["2500+", "Technical Experts Placed"],
+  ["350+", "Enterprise Clients Served"],
+  ["95%", "Annual Client Retention"],
 ];
 
 export function Stats() {
   return (
-    <section className="bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-7xl px-6 py-20">
+    <section className="bg-primary text-primary-foreground relative overflow-hidden">
+      {/* Background technical grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.08]"
+        style={{
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.3) 1px, transparent 1px)",
+          backgroundSize: "16px 16px",
+        }}
+      />
+      <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {stats.map(([n, l], i) => (
             <Reveal key={l} delay={i * 80}>

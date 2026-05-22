@@ -4,11 +4,11 @@ import { IconCheck, IconArrowRight } from "../Icons";
 import { openContactModal } from "@/lib/contact-modal";
 
 const items = [
-  "Strategic talent acquisition across 50+ technology domains",
-  "AI-driven digital transformation consulting",
-  "Dedicated delivery model with 95%+ satisfaction rate",
-  "DUNS registered, E-Verify compliant, fully insured",
-  "Nationwide reach with deep local market expertise",
+  "Strategic talent acquisition across 50+ specialized engineering domains",
+  "Production-ready Generative AI systems and MLOps consulting",
+  "Dedicated delivery frameworks ensuring a 95%+ client retention rate",
+  "Fully compliant frameworks: DUNS registered, E-Verify compliant, and fully insured",
+  "Global delivery capabilities backed by deep local market knowledge",
 ];
 
 export function About() {
@@ -18,17 +18,17 @@ export function About() {
         <Reveal>
           <SectionLabel>Who We Are</SectionLabel>
           <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-            15 Years of Delivering IT Excellence
+            Over Fifteen Years of Delivering Technical Excellence
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed">
-            Iresh Technologies is a full-service IT solutions and staffing company with a proven
-            track record of empowering businesses to scale faster, operate smarter, and compete
-            confidently in the digital era.
+            Infynix Tech Solutions is a premium, full-service technology solutions and technical staffing partner
+            with an established history of enabling enterprises to scale seamlessly, automate processes, and
+            build long-term value in a rapidly evolving market.
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            From startup to Fortune 500, we deliver the talent and technology that organizations
-            need to win — combining domain expertise, innovative tools, and a relentless commitment
-            to quality.
+            Serving high-growth startups and global Fortune 500 enterprises alike, we deliver the technical
+            specialists and robust custom systems required to win—unifying deep domain expertise, innovative
+            workflows, and a commitment to delivery quality.
           </p>
           <button
             onClick={openContactModal}

@@ -6,10 +6,10 @@ import { ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
-      { title: "Blog — Iresh Technologies" },
+      { title: "Blog — Infynix Tech Solutions" },
       { name: "description", content: "Insights on AI, cloud, data, hiring and engineering leadership." },
-      { property: "og:title", content: "Blog — Iresh Technologies" },
-      { property: "og:description", content: "Insights from the Iresh Technologies team." },
+      { property: "og:title", content: "Blog — Infynix Tech Solutions" },
+      { property: "og:description", content: "Insights from the Infynix Tech Solutions team." },
     ],
   }),
   component: BlogPage,

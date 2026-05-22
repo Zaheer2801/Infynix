@@ -7,13 +7,13 @@ import { ArrowRight, Check } from "lucide-react";
 export const Route = createFileRoute("/case-studies/$slug")({
   head: ({ params }) => {
     const c = caseStudies.find((x) => x.slug === params.slug);
-    const title = c ? `${c.title} — Iresh Technologies` : "Case Study — Iresh Technologies";
+    const title = c ? `${c.title} — Infynix Tech Solutions` : "Case Study — Infynix Tech Solutions";
     return {
       meta: [
         { title },
-        { name: "description", content: c?.summary ?? "Iresh Technologies case study." },
+        { name: "description", content: c?.summary ?? "Infynix Tech Solutions case study." },
         { property: "og:title", content: title },
-        { property: "og:description", content: c?.summary ?? "Iresh Technologies case study." },
+        { property: "og:description", content: c?.summary ?? "Infynix Tech Solutions case study." },
       ],
     };
   },

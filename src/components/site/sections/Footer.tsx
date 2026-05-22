@@ -50,10 +50,10 @@ const cols: { title: string; items: FooterLink[] }[] = [
 ];
 
 const socials = [
-  { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/ireshtechnologies" },
-  { Icon: IconX, label: "X", href: "https://twitter.com/ireshtech" },
-  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/ireshtechnologies" },
-  { Icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@ireshtechnologies" },
+  { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/infynix-tech-solutions-llc/about/" },
+  { Icon: IconX, label: "X", href: "https://twitter.com/infynixtek" },
+  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/infynixtek" },
+  { Icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@infynixtek" },
 ];
 
 export function Footer() {
@@ -63,7 +63,7 @@ export function Footer() {
         <div className="grid lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] gap-10">
           <div>
             <div className="font-bold tracking-tight text-base">
-              IRESH <span className="text-primary">TECHNOLOGIES</span>
+              INFYNIX <span className="text-primary">TECH SOLUTIONS</span>
             </div>
             <p className="mt-5 text-sm leading-[1.7] text-dark-muted">
               Your strategic partner for IT staffing, AI solutions, and digital transformation.
@@ -120,11 +120,13 @@ export function Footer() {
               Contact
             </div>
             <ul className="mt-5 space-y-3 text-sm text-dark-muted">
-              <li className="flex items-center gap-2"><MapPin size={14} className="text-primary" /> St Louis, MO (US)</li>
-              <li className="flex items-center gap-2"><MapPin size={14} className="text-primary" /> London, England (UK)</li>
+              <li className="flex items-start gap-2">
+                <MapPin size={14} className="text-primary shrink-0 mt-0.5" />
+                <span>7901 4TH ST N STE 300, ST. PETERSBURG, FL. 33702 US</span>
+              </li>
               <li className="flex items-center gap-2">
                 <Mail size={14} className="text-primary" />
-                <a href="mailto:hr@ireshtechnologies.com" className="hover:text-dark-foreground transition-colors">hr@ireshtechnologies.com</a>
+                <a href="mailto:info@infynixtek.com" className="hover:text-dark-foreground transition-colors">info@infynixtek.com</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone size={14} className="text-primary" />
@@ -153,7 +155,7 @@ export function Footer() {
 
         <div className="mt-14 pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-dark-border">
           <div className="text-[13px] text-dark-muted/70">
-            © 2026 Iresh Technologies, Inc. All rights reserved.
+            © 2026 Infynix Tech Solutions, LLC. All rights reserved.
           </div>
           <div className="flex gap-5 text-[13px]">
             {["Privacy Policy", "Terms & Conditions"].map((l) => (

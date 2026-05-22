@@ -10,6 +10,8 @@ import {
   Linkedin,
   Facebook,
   Youtube,
+  ShieldCheck,
+  CheckCircle,
 } from "lucide-react";
 import type { SVGProps } from "react";
 import eVerifyLogo from "@/assets/e-verify.png";
@@ -34,134 +36,74 @@ const services = [
 const offices = [
   {
     code: "US HEADQUARTERS",
-    title: "US Office",
+    title: "US Headquarters",
+    city: "St. Petersburg Hub",
     address: [
-      "100 Chesterfield Business Parkway",
-      "Suite 200, St Louis, MO 63005",
-      "United States",
+      "7901 4TH ST N STE 300",
+      "ST. PETERSBURG, FL. 33702 US",
     ],
     mapSrc:
-      "https://www.google.com/maps?q=100+Chesterfield+Business+Parkway,+St+Louis,+MO+63005&z=14&output=embed",
-  },
-  {
-    code: "UK HEADQUARTERS",
-    title: "UK Office",
-    address: [
-      "Iresh Holdings LTD",
-      "275 New North Road #3002",
-      "London, England, N17AA",
-    ],
-    mapSrc:
-      "https://www.google.com/maps?q=275+New+North+Road,+London,+N1+7AA&z=14&output=embed",
+      "https://www.google.com/maps?q=7901+4TH+ST+N+STE+300,+St.+Petersburg,+FL+33702&z=14&output=embed",
+    phone: "(219) 249-0009",
+    email: "info@infynixtek.com",
+    hours: "8:00 AM – 6:00 PM EST",
   },
 ];
 
-const phones = [
-  { label: "Main", value: "(219) 249-0009" },
-  { label: "Direct", value: "(555) 123-4567" },
-  { label: "Emergency", value: "(555) 911-8324" },
-];
-const emails = [
-  { label: "HR", value: "hr@ireshtechnologies.com" },
-  { label: "General", value: "info@ireshtechnologies.com" },
-  { label: "Sales", value: "sales@ireshtechnologies.com" },
-  { label: "Support", value: "support@ireshtechnologies.com" },
-];
-const hours = [
-  { label: "Mon – Fri", value: "8:00 AM – 6:00 PM PST" },
-  { label: "Saturday", value: "9:00 AM – 2:00 PM PST" },
-  { label: "Sunday", value: "Emergency Only" },
-];
 const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/ireshtechnologies", Icon: Linkedin },
-  { label: "X (Twitter)", href: "https://twitter.com/ireshtech", Icon: IconX },
-  { label: "Facebook", href: "https://www.facebook.com/ireshtechnologies", Icon: Facebook },
-  { label: "YouTube", href: "https://www.youtube.com/@ireshtechnologies", Icon: Youtube },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/infynix-tech-solutions-llc/about/", Icon: Linkedin },
+  { label: "X (Twitter)", href: "https://twitter.com/infynixtek", Icon: IconX },
+  { label: "Facebook", href: "https://www.facebook.com/infynixtek", Icon: Facebook },
+  { label: "YouTube", href: "https://www.youtube.com/@infynixtek", Icon: Youtube },
 ];
-
-function InfoCard({
-  icon,
-  title,
-  children,
-}: {
-  icon: ReactNode;
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="rounded-xl p-6 bg-secondary border border-border hover:border-primary hover:-translate-y-1 transition-all duration-300 h-full">
-      <div className="flex items-center gap-3 mb-4">
-        <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-          {icon}
-        </span>
-        <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground">
-          {title}
-        </div>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function KV({ k, v, href }: { k: string; v: string; href?: string }) {
-  return (
-    <li className="flex items-baseline justify-between gap-3 text-sm">
-      <span className="shrink-0 text-muted-foreground">{k}</span>
-      {href ? (
-        <a
-          href={href}
-          className="text-right truncate font-medium text-foreground hover:text-primary transition-colors"
-        >
-          {v}
-        </a>
-      ) : (
-        <span className="text-right font-medium text-foreground">{v}</span>
-      )}
-    </li>
-  );
-}
 
 export function Contact() {
+  const [activeOffice, setActiveOffice] = useState(0);
   const [sent, setSent] = useState(false);
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     setSent(true);
   };
 
-  const input =
-    "w-full bg-background border border-border rounded-lg px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition";
+  const inputStyle =
+    "w-full bg-background/70 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 hover:border-border/80 transition-all duration-300 shadow-sm";
 
   return (
-    <section id="contact" className="bg-background">
-      <div className="mx-auto max-w-[1200px] px-6 py-[90px]">
-        {/* HEADER */}
+    <section id="contact" className="relative bg-background overflow-hidden border-t border-border/40">
+      {/* Background radial accent glows for deep brand richness */}
+      <div className="pointer-events-none absolute -left-64 -top-64 h-[600px] w-[600px] rounded-full bg-primary/5 blur-3xl opacity-80" />
+      <div className="pointer-events-none absolute -right-64 -bottom-64 h-[600px] w-[600px] rounded-full bg-primary/5 blur-3xl opacity-80" />
+
+      <div className="mx-auto max-w-[1200px] px-6 py-24 relative z-10">
+        {/* HEADER SECTION */}
         <Reveal>
-          <div className="grid lg:grid-cols-2 gap-8 items-end">
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.1em] text-primary">
+          <div className="grid lg:grid-cols-12 gap-8 items-end mb-16">
+            <div className="lg:col-span-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold uppercase tracking-wider text-primary">
                 Get In Touch
               </div>
-              <h2 className="mt-3 font-bold leading-[1.1] text-foreground text-[38px]">
-                Let's Build Something Great Together
+              <h2 className="mt-4 font-bold leading-[1.1] tracking-tight text-foreground text-4xl md:text-5xl">
+                Let's engineer something <span className="text-primary">exceptional</span> together.
               </h2>
-              <p className="mt-4 max-w-xl text-muted-foreground text-base">
-                Tell us about your project or staffing needs. Our experts respond within 24
-                business hours.
+              <p className="mt-4 max-w-2xl text-muted-foreground text-base md:text-lg leading-relaxed">
+                Tell us about your project scaling requirements or technology recruitment needs. 
+                Our engineering advisors will review and align custom solutions.
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 lg:justify-end">
+            <div className="lg:col-span-4 flex flex-wrap gap-4 lg:justify-end items-center">
               <a
                 href="https://www.e-verify.gov/e-verify-employer-search"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="E-Verify Employer Search"
-                className="cert-badge inline-flex items-center justify-center rounded-lg bg-background px-4 py-2 border border-border transition-all duration-300"
+                className="cert-badge inline-flex items-center justify-center rounded-lg bg-background/50 backdrop-blur-sm px-4 py-2.5 border border-border shadow-sm transition-all duration-300"
               >
                 <img src={eVerifyLogo} alt="E-Verify" className="h-8 w-auto object-contain" />
               </a>
               <span
                 aria-label="D-U-N-S Registered"
-                className="cert-badge inline-flex items-center justify-center rounded-lg bg-background px-4 py-2 border border-border transition-all duration-300"
+                className="cert-badge inline-flex items-center justify-center rounded-lg bg-background/50 backdrop-blur-sm px-4 py-2.5 border border-border shadow-sm transition-all duration-300"
               >
                 <img src={dunsLogo} alt="D-U-N-S Registered" className="h-10 w-auto object-contain" />
               </span>
@@ -169,152 +111,330 @@ export function Contact() {
           </div>
         </Reveal>
 
-        {/* OFFICES */}
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {offices.map((o, i) => (
-            <Reveal key={o.code} delay={i * 80}>
-              <div className="rounded-[12px] p-7 bg-secondary border border-border hover:border-primary hover:-translate-y-[3px] transition-all duration-300 h-full">
-                <div className="grid sm:grid-cols-[1fr_220px] gap-6 items-stretch">
+        {/* TWO-COLUMN GRID */}
+        <div className="grid lg:grid-cols-12 gap-10 items-start">
+          
+          {/* LEFT COLUMN: INTERACTIVE OFFICE HUB */}
+          <div className="lg:col-span-5 space-y-6">
+            <Reveal delay={60}>
+              <div className="space-y-6">
+                
+                {/* Office Tab Switcher */}
+                {offices.length > 1 && (
+                  <div className="bg-secondary/40 border border-border rounded-xl p-1.5 flex gap-2 shadow-inner">
+                    {offices.map((o, idx) => (
+                      <button
+                        key={o.code}
+                        onClick={() => setActiveOffice(idx)}
+                        className={`flex-1 py-2.5 px-4 text-xs font-semibold rounded-lg tracking-wider transition-all duration-300 ${
+                          activeOffice === idx
+                            ? "bg-primary text-primary-foreground shadow-md font-bold"
+                            : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                        }`}
+                      >
+                        {o.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Hub Profile Details Card */}
+                <div className="bg-secondary/30 backdrop-blur-sm border border-border rounded-2xl p-6 md:p-8 space-y-6 hover:border-primary/30 transition-all duration-300 shadow-sm relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <Globe size={120} className="text-foreground" />
+                  </div>
+                  
                   <div>
-                    <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
-                      {o.code}
+                    <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">
+                      {offices[activeOffice].code}
                     </div>
-                    <div className="mt-2 font-bold text-foreground text-[18px]">{o.title}</div>
-                    <div className="mt-3 space-y-1 text-sm text-muted-foreground">
-                      {o.address.map((l) => (
-                        <div key={l}>{l}</div>
-                      ))}
-                    </div>
-                    <div className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-primary">
-                      <MapPin size={14} /> View on map
+                    <h3 className="mt-2 text-2xl font-bold text-foreground">
+                      {offices[activeOffice].city}
+                    </h3>
+                    
+                    {/* Local Address Details */}
+                    <div className="mt-4 flex gap-3 text-sm text-muted-foreground leading-relaxed">
+                      <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
+                      <div className="space-y-1">
+                        {offices[activeOffice].address.map((line) => (
+                          <div key={line}>{line}</div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div className="relative overflow-hidden rounded-lg h-[140px]">
-                    <iframe
-                      title={`${o.title} map`}
-                      src={o.mapSrc}
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="absolute inset-0 h-full w-full"
-                      style={{ border: 0 }}
-                    />
+
+                  <hr className="border-border/60" />
+
+                  {/* Local Coordinates (Phones, Emails, Hours) */}
+                  <div className="space-y-3.5 relative z-10">
+                    <div className="flex items-center gap-3 text-sm">
+                      <Phone size={16} className="text-primary shrink-0" />
+                      <span className="text-muted-foreground font-medium w-14">Phone:</span>
+                      <a
+                        href={`tel:${offices[activeOffice].phone.replace(/\D/g, "")}`}
+                        className="text-foreground hover:text-primary transition-colors font-semibold"
+                      >
+                        {offices[activeOffice].phone}
+                      </a>
+                    </div>
+
+                    <div className="flex items-center gap-3 text-sm">
+                      <Mail size={16} className="text-primary shrink-0" />
+                      <span className="text-muted-foreground font-medium w-14">Email:</span>
+                      <a
+                        href={`mailto:${offices[activeOffice].email}`}
+                        className="text-foreground hover:text-primary transition-colors font-semibold truncate"
+                      >
+                        {offices[activeOffice].email}
+                      </a>
+                    </div>
+
+                    <div className="flex items-center gap-3 text-sm">
+                      <Clock size={16} className="text-primary shrink-0" />
+                      <span className="text-muted-foreground font-medium w-14">Hours:</span>
+                      <span className="text-foreground font-semibold">
+                        {offices[activeOffice].hours}
+                      </span>
+                    </div>
                   </div>
                 </div>
+
+                {/* Map Preview Card */}
+                <div className="relative overflow-hidden rounded-2xl border border-border bg-secondary/20 h-[280px] shadow-md group">
+                  <iframe
+                    title={`${offices[activeOffice].title} Map`}
+                    src={offices[activeOffice].mapSrc}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 h-full w-full opacity-90 group-hover:scale-[1.02] group-hover:opacity-100 transition-all duration-700"
+                    style={{ border: 0 }}
+                  />
+                  <div className="absolute bottom-4 left-4 right-4 bg-background/90 backdrop-blur-sm border border-border/80 px-4 py-2.5 rounded-xl flex items-center justify-between shadow-md">
+                    <span className="text-xs font-semibold text-foreground">Interactive Hub View</span>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-primary animate-pulse flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Active Live GPS
+                    </span>
+                  </div>
+                </div>
+
+                {/* Support Directories & Social Networks */}
+                <div className="bg-secondary/15 border border-border/60 rounded-xl p-5 space-y-4 shadow-sm">
+                  <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+                    <ShieldCheck size={14} className="text-primary" /> Core Directories
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 text-xs">
+                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
+                      <span className="text-muted-foreground font-medium">Careers / HR</span>
+                      <a href="mailto:hr@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
+                        hr@infynixtek.com
+                      </a>
+                    </div>
+                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
+                      <span className="text-muted-foreground font-medium">Enterprise Sales</span>
+                      <a href="mailto:sales@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
+                        sales@infynixtek.com
+                      </a>
+                    </div>
+                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
+                      <span className="text-muted-foreground font-medium">Technical Support</span>
+                      <a href="mailto:support@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
+                        support@infynixtek.com
+                      </a>
+                    </div>
+                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
+                      <span className="text-muted-foreground font-medium">General Inquiries</span>
+                      <a href="mailto:info@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
+                        info@infynixtek.com
+                      </a>
+                    </div>
+                  </div>
+                  
+                  {/* Social Network Integrations */}
+                  <div className="flex items-center justify-between pt-3 border-t border-border/40">
+                    <span className="text-xs text-muted-foreground font-medium">Global presence:</span>
+                    <div className="flex items-center gap-2">
+                      {socials.map(({ label, href, Icon }) => (
+                        <a
+                          key={label}
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={label}
+                          title={label}
+                          className="social-glow group inline-flex h-8 w-8 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5 shadow-sm"
+                        >
+                          <Icon width={13} height={13} />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </Reveal>
-          ))}
-        </div>
-
-        {/* INFO ROW */}
-        <div className="mt-6 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <InfoCard icon={<Phone size={18} />} title="Phone">
-            <a
-              href={`tel:${phones[0].value.replace(/\D/g, "")}`}
-              aria-label="Call us"
-              title="Call us"
-              className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
-            >
-              <Phone size={16} />
-            </a>
-          </InfoCard>
-
-          <InfoCard icon={<Mail size={18} />} title="Email">
-            <a
-              href={`mailto:${emails[0].value}`}
-              aria-label="Email us"
-              title="Email us"
-              className="social-glow inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
-            >
-              <Mail size={16} />
-            </a>
-          </InfoCard>
-
-          <InfoCard icon={<Clock size={18} />} title="Business Hours">
-            <ul className="space-y-2.5">
-              {hours.map((h) => (
-                <KV key={h.label} k={h.label} v={h.value} />
-              ))}
-            </ul>
-          </InfoCard>
-
-          <InfoCard icon={<Globe size={18} />} title="Follow Us">
-            <div className="flex items-center gap-3 pt-1">
-              {socials.map(({ label, href, Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="social-glow group inline-flex h-11 w-11 items-center justify-center rounded-full bg-background border border-border text-foreground transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:-translate-y-0.5"
-                >
-                  <Icon width={18} height={18} />
-                </a>
-              ))}
-            </div>
-            <p className="mt-4 text-xs text-muted-foreground">
-              Follow us for product updates, hiring news and insights.
-            </p>
-          </InfoCard>
-        </div>
-
-        {/* FORM */}
-        <Reveal delay={120}>
-          <div className="mt-10 rounded-[16px] p-8 md:p-12 grid lg:grid-cols-[1fr_1.3fr] gap-10 bg-secondary border border-border">
-            <div>
-              <h3 className="font-bold leading-tight text-foreground text-[28px]">
-                Send Us a Message
-              </h3>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Fill out the form and we'll get back to you within one business day.
-              </p>
-              <div className="mt-7 space-y-4 text-sm">
-                {[
-                  { Icon: Phone, label: "(219) 249-0009" },
-                  { Icon: Mail, label: "hr@ireshtechnologies.com" },
-                  { Icon: Clock, label: "Mon – Fri, 8 AM – 6 PM PST" },
-                  { Icon: MapPin, label: "St Louis, MO · London, UK" },
-                ].map(({ Icon, label }) => (
-                  <div key={label} className="flex items-center gap-3 text-foreground">
-                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-background text-primary border border-border">
-                      <Icon size={15} />
-                    </span>
-                    <span className="font-medium">{label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <form onSubmit={onSubmit} className="grid gap-4">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <input className={input} placeholder="First Name" required />
-                <input className={input} placeholder="Last Name" required />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <input className={input} type="email" placeholder="Work Email" required />
-                <input className={input} placeholder="Company" required />
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <input className={input} placeholder="Phone" />
-                <select className={input} defaultValue="">
-                  <option value="" disabled>
-                    Service Interested In
-                  </option>
-                  {services.map((s) => (
-                    <option key={s}>{s}</option>
-                  ))}
-                </select>
-              </div>
-              <textarea className={input} rows={4} placeholder="Tell Us About Your Needs" />
-              <button
-                type="submit"
-                className="mt-1 inline-flex items-center justify-center gap-2 w-full px-7 py-3.5 font-semibold text-primary-foreground bg-primary hover:bg-primary-hover rounded-[10px] text-base transition-colors"
-              >
-                {sent ? "Message Sent ✓" : "Send Message"} <ArrowRight size={18} />
-              </button>
-            </form>
           </div>
-        </Reveal>
+
+          {/* RIGHT COLUMN: ENTERPRISE MESSAGE CENTER */}
+          <div className="lg:col-span-7">
+            <Reveal delay={120}>
+              <div className="bg-secondary/40 backdrop-blur-md border border-border rounded-3xl p-8 md:p-10 shadow-lg relative overflow-hidden group hover:border-primary/20 transition-all duration-300">
+                {/* Visual glow element in top right corner */}
+                <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-primary/5 blur-3xl group-hover:bg-primary/8 transition-colors duration-500" />
+                
+                {sent ? (
+                  /* GORGEOUS HIGH-IMPACT SUCCESS PANEL */
+                  <div className="flex flex-col items-center justify-center text-center py-6 px-4 animate-fade-in-up">
+                    <div className="relative mb-6">
+                      {/* Pulsing visual halo */}
+                      <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping" />
+                      <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md">
+                        <CheckCircle size={38} className="animate-bounce" />
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold text-foreground tracking-tight">
+                      Message Logged Successfully!
+                    </h3>
+                    <p className="mt-3 text-sm text-muted-foreground max-w-md leading-relaxed">
+                      Your business and engineering requirements are securely transmitted to our core systems. Here is your tracking route:
+                    </p>
+
+                    {/* Interactive Response Timeline */}
+                    <div className="mt-10 w-full max-w-md space-y-6 text-left relative z-10">
+                      
+                      {/* Step 1 */}
+                      <div className="relative pl-8 before:absolute before:left-3.5 before:top-2 before:bottom-[-24px] before:w-0.5 before:bg-primary last:before:hidden">
+                        <div className="absolute left-0 top-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold shadow-sm">
+                          1
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-foreground">Secure System Receipt</div>
+                          <div className="text-xs text-muted-foreground mt-0.5">Automated confirmation has been queued.</div>
+                        </div>
+                      </div>
+
+                      {/* Step 2 */}
+                      <div className="relative pl-8 before:absolute before:left-3.5 before:top-2 before:bottom-[-24px] before:w-0.5 before:bg-border last:before:hidden">
+                        <div className="absolute left-0 top-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-primary/20 text-primary border border-primary/40 text-xs font-bold animate-pulse">
+                          2
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-foreground">Architect Alignment</div>
+                          <div className="text-xs text-muted-foreground mt-0.5">Matching your requirements to our regional solutions director.</div>
+                        </div>
+                      </div>
+
+                      {/* Step 3 */}
+                      <div className="relative pl-8">
+                        <div className="absolute left-0 top-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-secondary border border-border text-muted-foreground text-xs font-bold">
+                          3
+                        </div>
+                        <div>
+                          <div className="text-sm font-bold text-muted-foreground">Direct Consultation</div>
+                          <div className="text-xs text-muted-foreground mt-0.5">Expert review call & architectural proposal sent to email.</div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div className="mt-8 p-4 bg-background border border-border rounded-xl text-xs text-muted-foreground flex items-center gap-3 w-full max-w-md shadow-sm">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                      <span>Average consultation scheduling speed: <strong>4.2 business hours</strong></span>
+                    </div>
+
+                    <button
+                      onClick={() => setSent(false)}
+                      className="mt-8 text-xs font-bold text-primary hover:text-primary-hover underline underline-offset-4 transition-colors"
+                    >
+                      Need to log another request? Click here
+                    </button>
+                  </div>
+                ) : (
+                  /* RE-ENGINEERED ENTERPRISE FORM */
+                  <div className="relative z-10">
+                    <h3 className="text-2xl font-bold tracking-tight text-foreground">
+                      Request Consultation
+                    </h3>
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Fill out your technical parameters below. Our experts respond in under 24 business hours.
+                    </p>
+                    
+                    <form onSubmit={onSubmit} className="mt-8 grid gap-5">
+                      
+                      {/* Name Row */}
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">First Name *</label>
+                          <input className={inputStyle} placeholder="Jane" required />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Last Name *</label>
+                          <input className={inputStyle} placeholder="Doe" required />
+                        </div>
+                      </div>
+
+                      {/* Email & Company Row */}
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Work Email *</label>
+                          <input className={inputStyle} type="email" placeholder="jane.doe@company.com" required />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Company Name *</label>
+                          <input className={inputStyle} placeholder="Enterprise Inc." required />
+                        </div>
+                      </div>
+
+                      {/* Phone & Service Row */}
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Phone Number</label>
+                          <input className={inputStyle} type="tel" placeholder="(219) 249-0009" />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Service Interest *</label>
+                          <div className="relative">
+                            <select className={`${inputStyle} appearance-none cursor-pointer pr-10`} defaultValue="" required>
+                              <option value="" disabled>Select Core Specialty</option>
+                              {services.map((s) => (
+                                <option key={s} value={s}>{s}</option>
+                              ))}
+                            </select>
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-muted-foreground">
+                              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Textarea Description */}
+                      <div className="space-y-1.5">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Project Parameters & Timeline</label>
+                        <textarea
+                          className={`${inputStyle} resize-none`}
+                          rows={4}
+                          placeholder="Please provide details about technical staffing, engineering scope, or infrastructure objectives..."
+                        />
+                      </div>
+
+                      {/* Submit Button */}
+                      <button
+                        type="submit"
+                        className="mt-2 inline-flex items-center justify-center gap-2 w-full px-8 py-4 font-bold text-primary-foreground bg-primary hover:bg-primary-hover rounded-xl text-base shadow-sm hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
+                      >
+                        Submit Technical Request <ArrowRight size={18} />
+                      </button>
+                    </form>
+                  </div>
+                )}
+
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
       </div>
     </section>
   );

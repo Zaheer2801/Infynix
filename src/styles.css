@@ -1,7 +1,7 @@
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@source "../src";
 
 .cert-badge:hover {
   transform: translateY(-2px);
@@ -80,44 +80,44 @@
 }
 
 :root {
-  --radius: 0.25rem;
+  --radius: 0.75rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.01 250);
+  --foreground: oklch(0.18 0.01 240);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.01 250);
+  --card-foreground: oklch(0.18 0.01 240);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.01 250);
-  --primary: oklch(0.58 0.23 258);
+  --popover-foreground: oklch(0.18 0.01 240);
+  --primary: oklch(0.38 0.12 242); /* Sapphire Navy #0D5380 */
   --primary-foreground: oklch(1 0 0);
-  --primary-hover: oklch(0.52 0.22 258);
-  --secondary: oklch(0.97 0.005 250);
-  --secondary-foreground: oklch(0.18 0.01 250);
-  --muted: oklch(0.96 0.005 250);
-  --muted-foreground: oklch(0.5 0.01 250);
-  --accent: oklch(0.78 0.13 95);
-  --accent-foreground: oklch(0.18 0.05 260);
+  --primary-hover: oklch(0.32 0.1 242); /* Dark Sapphire hover */
+  --secondary: oklch(0.97 0.01 240); /* Soft sky white #F4F9FD */
+  --secondary-foreground: oklch(0.18 0.01 240);
+  --muted: oklch(0.96 0.01 240);
+  --muted-foreground: oklch(0.45 0.02 240);
+  --accent: oklch(0.44 0.15 137); /* Corporate highlight green #297010 */
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.005 250);
-  --input: oklch(0.9 0.005 250);
-  --ring: oklch(0.58 0.23 258);
-  --dark: oklch(0.22 0.11 260);
+  --border: oklch(0.85 0.06 240); /* Ice Blue outline #A7D3F3 */
+  --input: oklch(0.85 0.06 240);
+  --ring: oklch(0.38 0.12 242);
+  --dark: oklch(0.12 0.04 240);
   --dark-foreground: oklch(0.98 0 0);
   --dark-muted: oklch(0.82 0.04 240);
   --dark-border: oklch(1 0 0 / 12%);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-1: oklch(0.38 0.12 242);
+  --chart-2: oklch(0.44 0.15 137);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --sidebar: oklch(0.984 0.003 247.858);
   --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
+  --sidebar-primary: oklch(0.38 0.12 242);
   --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
   --sidebar-accent: oklch(0.968 0.007 247.896);
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --sidebar-border: oklch(0.85 0.06 240);
+  --sidebar-ring: oklch(0.38 0.12 242);
 }
 
 .dark {
@@ -181,7 +181,7 @@
   }
 }
 
-/* Industry card — radial ripple reveal from cursor position (savancys.com style) */
+/* Industry card — radial ripple reveal from cursor position (infynixtek.com style) */
 .industry-card::before {
   content: "";
   position: absolute;
@@ -302,4 +302,35 @@
 .tech-tile:hover .tech-desc,
 .tech-tile.is-active .tech-desc {
   color: color-mix(in oklab, var(--tech-fg, #fff) 92%, transparent);
+}
+
+@keyframes shimmer-load {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(-30%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes float-badge-1 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes float-badge-2 {
+  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) translateX(5px) rotate(-2deg); }
+  100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+}
+@keyframes float-badge-3 {
+  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) translateX(-5px) rotate(1deg); }
+  100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+}
+.animate-float-1 {
+  animation: float-badge-1 7s ease-in-out infinite;
+}
+.animate-float-2 {
+  animation: float-badge-2 8s ease-in-out infinite;
+}
+.animate-float-3 {
+  animation: float-badge-3 9s ease-in-out infinite;
 }

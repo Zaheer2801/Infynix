@@ -6,10 +6,10 @@ import { ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
     meta: [
-      { title: "Case Studies — Iresh Technologies" },
+      { title: "Case Studies — Infynix Tech Solutions" },
       { name: "description", content: "Real-world outcomes across AI, cloud, data and digital transformation." },
-      { property: "og:title", content: "Case Studies — Iresh Technologies" },
-      { property: "og:description", content: "Selected client outcomes from Iresh Technologies." },
+      { property: "og:title", content: "Case Studies — Infynix Tech Solutions" },
+      { property: "og:description", content: "Selected client outcomes from Infynix Tech Solutions." },
     ],
   }),
   component: CaseStudiesPage,
