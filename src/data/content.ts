@@ -849,3 +849,205 @@ export const blogPosts: BlogPost[] = [
     ],
   },
 ];
+
+export type JobExtra = {
+  jobCode: string;
+  salary: string;
+  yourRole: string;
+  whatWeExpect: string[];
+};
+
+export const jobExtras: Record<string, JobExtra> = {
+  "senior-react-engineer": {
+    jobCode: "INX-2026-WM01",
+    salary: "$140K – $175K / yr",
+    yourRole:
+      "You will be the technical anchor of a cross-functional product pod, owning the architecture and quality of a high-traffic React application used by hundreds of thousands of enterprise users. Day-to-day you will pair with designers on component APIs, drive performance sprints, and unblock junior engineers through code review and mentoring. Your decisions on patterns and tooling will set the standard for the entire frontend organization.",
+    whatWeExpect: [
+      "You take full ownership of outcomes — proactively flagging risks before they become incidents.",
+      "You communicate architectural trade-offs clearly to both engineers and non-technical stakeholders.",
+      "You raise the quality bar through peer reviews, RFC proposals, and knowledge-sharing sessions.",
+      "You iterate fast, value shipping over perfection, and back decisions with data.",
+    ],
+  },
+  "ml-engineer-genai": {
+    jobCode: "INX-2026-AI01",
+    salary: "$160K – $200K / yr",
+    yourRole:
+      "You will design and operate production LLM systems that directly power enterprise client products — from real-time RAG pipelines serving thousands of daily queries to autonomous agents that execute multi-step business workflows. You will work at the intersection of model research and systems engineering, owning the full lifecycle from prototype to monitored production.",
+    whatWeExpect: [
+      "You stay ahead of the fast-moving GenAI landscape and bring relevant advances into production, not just slides.",
+      "You treat model evaluation and safety guardrails as first-class engineering concerns, not afterthoughts.",
+      "You have strong intuition for latency/cost trade-offs and make disciplined decisions about when to fine-tune versus prompt.",
+      "You collaborate closely with product and business teams to ensure AI capabilities solve real user problems.",
+    ],
+  },
+  "aws-devops-engineer": {
+    jobCode: "INX-2026-CD01",
+    salary: "$85 – $110 / hr",
+    yourRole:
+      "Embedded within a financial services client team, you will own the AWS cloud platform across multiple accounts — designing the landing zone architecture, hardening security posture, and ensuring every team ships through automated GitOps pipelines. You'll be the go-to expert that engineering pods call when deployments fail, cost spikes, or security alerts fire.",
+    whatWeExpect: [
+      "You treat infrastructure as product: readable, tested, and documented Terraform that others can maintain.",
+      "You drive a security-first mindset — every IAM boundary, network rule, and secret rotation is intentional.",
+      "You are comfortable presenting architecture decisions to client CTOs and security review boards.",
+      "You work autonomously under pressure, triaging production incidents with calm and speed.",
+    ],
+  },
+  "data-engineer-snowflake": {
+    jobCode: "INX-2026-DE01",
+    salary: "$130K – $160K / yr",
+    yourRole:
+      "You will build the data foundations that analysts, scientists, and executives depend on every morning. Working inside a modern Snowflake + dbt stack, you will design dimensional models, manage orchestrated pipelines in Airflow, and establish the data quality contracts that keep reporting trustworthy.",
+    whatWeExpect: [
+      "You think in data contracts — schemas, SLAs, and quality expectations are defined upfront, not after the data breaks.",
+      "You document models, lineage, and pipelines as thoroughly as you test them.",
+      "You collaborate naturally with analytics engineers to ensure semantic layers are business-correct.",
+      "You are comfortable triaging silent data bugs and presenting findings to business stakeholders.",
+    ],
+  },
+  "salesforce-developer": {
+    jobCode: "INX-2026-ERP01",
+    salary: "$110K – $140K / yr",
+    yourRole:
+      "You will serve as a core technical contributor inside a multi-year Salesforce transformation program for a top-10 financial services firm. You will build custom Apex services, LWC components, and integration layers that connect Salesforce to core banking and risk systems. Your work will be used by over 2,000 advisors daily.",
+    whatWeExpect: [
+      "You are meticulous about governor limits, test coverage, and security review because you care about production stability.",
+      "You partner proactively with business analysts to challenge requirements and improve solutions before development.",
+      "You communicate technical constraints clearly to non-technical stakeholders and project managers.",
+      "You stay current on Salesforce platform releases and advocate for new capabilities where they reduce custom code.",
+    ],
+  },
+  "it-recruiter": {
+    jobCode: "INX-2026-TS01",
+    salary: "$75K – $100K / yr + commission",
+    yourRole:
+      "You will own full-cycle recruiting pipelines for senior cloud, AI, and platform engineering roles across multiple enterprise client accounts. Working closely with account managers and technical leaders, you'll source from niche developer communities, conduct structured pre-screens, and negotiate offers for hard-to-fill technical positions.",
+    whatWeExpect: [
+      "You are relentlessly resourceful — when LinkedIn runs dry, you find developers in GitHub discussions and Discord communities.",
+      "You hold yourself accountable to pipeline metrics: submission-to-interview rates, time-to-fill, and offer acceptance rates.",
+      "You earn candidate trust through honest, transparent communication — including when a role isn't the right fit.",
+      "You develop a genuine technical vocabulary to earn credibility with engineering hiring managers.",
+    ],
+  },
+  "flutter-engineer": {
+    jobCode: "INX-2026-WM02",
+    salary: "$90 – $115 / hr",
+    yourRole:
+      "You will be the lead Flutter engineer on a health-tech platform with over 500K active patients. You'll build new care-management features, write native platform plugins for iOS and Android health sensors, and work alongside a QA team to ensure HIPAA compliance across every release.",
+    whatWeExpect: [
+      "You sweat the performance details: frame drops, excessive rebuilds, and memory spikes are unacceptable in healthcare.",
+      "You read and write platform channel code confidently, bridging Flutter to native SDKs without hesitation.",
+      "You document data-handling decisions carefully given the HIPAA-regulated nature of the product.",
+      "You proactively raise UX concerns during sprint planning rather than waiting until QA cycle.",
+    ],
+  },
+  "computer-vision-engineer": {
+    jobCode: "INX-2026-AI02",
+    salary: "$145K – $185K / yr",
+    yourRole:
+      "You will deploy real-time visual inspection models on manufacturing lines running 24/7 in a Detroit automotive plant. From collecting defect annotation datasets with line operators to optimizing PyTorch models for NVIDIA Jetson edge hardware, you own the full model lifecycle: data, training, optimization, deployment, and monitoring.",
+    whatWeExpect: [
+      "You are hands-on with hardware — comfortable connecting to edge devices over SSH and debugging live inference.",
+      "You bring rigor to dataset quality, knowing that weak annotations lead to expensive false rejections on the factory floor.",
+      "You communicate model performance in business terms (precision, recall, cost-per-defect-missed).",
+      "You work comfortably in an industrial environment alongside mechanical and systems engineers.",
+    ],
+  },
+  "azure-data-architect": {
+    jobCode: "INX-2026-DE02",
+    salary: "$165K – $210K / yr",
+    yourRole:
+      "You will lead data architecture for a large-scale Azure Fabric migration at a top-5 US bank, defining the target state for petabyte-scale financial data from ingestion zones through governed semantic layers. You'll mentor a team of data engineers and interface directly with the client's CTO and Chief Data Officer on monthly steering committees.",
+    whatWeExpect: [
+      "You translate complex architectural decisions into clear business impact narratives for executive audiences.",
+      "You treat data governance, lineage, and access control as architectural pillars, not compliance checklists.",
+      "You mentor and coach effectively — your goal is to make the client team self-sufficient, not dependent.",
+      "You stay current on Azure Fabric and Databricks and proactively bring capabilities to client roadmaps.",
+    ],
+  },
+  "sap-s4-consultant": {
+    jobCode: "INX-2026-ERP02",
+    salary: "$95 – $120 / hr",
+    yourRole:
+      "You will be the functional lead for FICO on a greenfield SAP S/4HANA go-live targeting a Fortune 500 manufacturing company. This means running configuration workshops with CFOs and controllers, resolving cutover reconciliation issues under tight deadlines, and training the client's finance team on the new system.",
+    whatWeExpect: [
+      "You are accountable for functional design quality — every configuration decision is documented and traceable to a business requirement.",
+      "You stay calm under the pressure of cutover weekends and financial close cycles.",
+      "You build trusted advisor relationships with senior client stakeholders, not just project managers.",
+      "You proactively identify scope risks early and communicate them before they become budget issues.",
+    ],
+  },
+  "kubernetes-platform-engineer": {
+    jobCode: "INX-2026-CD02",
+    salary: "$140K – $180K / yr",
+    yourRole:
+      "You will build the internal developer platform that hundreds of engineers at a global retail client will use to ship software. Using Backstage, Kubernetes, and ArgoCD, you'll create golden paths — service templates, self-service environments, and deployment workflows — that make shipping fast, safe, and observable.",
+    whatWeExpect: [
+      "You think from the developer's perspective: every platform feature should reduce friction, not add it.",
+      "You instrument everything — meaningful metrics, dashboards, and SLOs for the platform itself.",
+      "You actively gather developer feedback and treat developer satisfaction as a product KPI.",
+      "You document architecture decisions thoroughly so the platform outlasts any individual contributor.",
+    ],
+  },
+  "ux-designer": {
+    jobCode: "INX-2026-WM03",
+    salary: "$120K – $155K / yr",
+    yourRole:
+      "You will own the end-to-end design experience for two enterprise B2B SaaS products used by finance and operations teams at Fortune 1000 companies. From conducting user research sessions with CFOs to delivering production-ready Figma specs, you are the sole voice of user experience in a fast-moving product pod.",
+    whatWeExpect: [
+      "You design with constraints in mind — accessibility, localization, and dense data tables are features, not exceptions.",
+      "You defend your design rationale with user research evidence, not personal preference.",
+      "You collaborate tightly with frontend engineers to ensure implementation fidelity without becoming a blocker.",
+      "You proactively identify workflow problems that aren't yet on the product roadmap.",
+    ],
+  },
+  "qa-automation-lead": {
+    jobCode: "INX-2026-WM04",
+    salary: "$120K – $150K / yr",
+    yourRole:
+      "You will build and lead the quality engineering function for a high-traffic fintech platform processing millions of transactions per day. That means designing the automation strategy, building Playwright test suites for critical user flows, embedding quality gates into CI/CD pipelines, and coaching developers to own quality — not just catch bugs.",
+    whatWeExpect: [
+      "You champion a shift-left mindset — quality belongs to the entire team, and you're the catalyst for that culture.",
+      "You write test code with the same standards as feature code: readable, maintainable, and version-controlled.",
+      "You communicate coverage and risk gaps clearly to engineering leads and product managers.",
+      "You are pragmatic about automation ROI — knowing which tests to automate first versus which to defer.",
+    ],
+  },
+  "cybersecurity-engineer": {
+    jobCode: "INX-2026-CD03",
+    salary: "$135K – $170K / yr",
+    yourRole:
+      "You will be the cloud security lead for a multi-account AWS environment supporting a healthcare data platform. You'll run threat modeling sessions, automate compliance controls using Wiz and AWS Security Hub, and serve as the incident commander when security alerts escalate. Your work protects patient data for millions of users.",
+    whatWeExpect: [
+      "You treat security as an enabler of engineering velocity, not a gate that slows teams down.",
+      "You can explain complex attack vectors in plain language to both developers and executive leadership.",
+      "You stay ahead of emerging cloud threats and translate threat intelligence into actionable controls.",
+      "You approach incidents with methodical clarity, prioritizing containment and post-mortems.",
+    ],
+  },
+  "ai-product-manager": {
+    jobCode: "INX-2026-AI03",
+    salary: "$155K – $195K / yr",
+    yourRole:
+      "You will own the full product lifecycle of an enterprise Generative AI suite used by 50+ Fortune 500 clients. From writing detailed PRDs with ML researchers to presenting quarterly roadmaps to a C-suite customer advisory board, you are accountable for product-market fit, adoption metrics, and revenue impact.",
+    whatWeExpect: [
+      "You ground roadmap decisions in user and revenue evidence, not technology trends alone.",
+      "You have enough AI/ML fluency to challenge model design decisions and spot evaluation gaps.",
+      "You operate with a founder's accountability — shipping on time, measuring outcomes, and owning misses.",
+      "You build strong relationships with enterprise customers, turning feedback into shipped capabilities quickly.",
+    ],
+  },
+  "business-analyst-bfsi": {
+    jobCode: "INX-2026-ERP03",
+    salary: "$80 – $100 / hr",
+    yourRole:
+      "Embedded within a core banking modernization program, you'll bridge the gap between business operations teams and engineering squads across payment processing and account servicing modules. You will run discovery workshops with C-level stakeholders, write precise user stories, coordinate UAT cycles, and track delivery against business KPIs.",
+    whatWeExpect: [
+      "You produce user stories and acceptance criteria that engineering teams can build from without follow-up questions.",
+      "You are comfortable challenging requirements when they conflict with technical feasibility or regulatory standards.",
+      "You take ownership of UAT coordination — managing test scripts, tracking defects, and communicating sign-off readiness.",
+      "You build trusted working relationships with both business stakeholders and technical delivery teams.",
+    ],
+  },
+};

@@ -141,7 +141,56 @@ export function Contact() {
                 {/* Hub Profile Details Card */}
                 <div className="bg-secondary/30 backdrop-blur-sm border border-border rounded-2xl p-6 md:p-8 space-y-6 hover:border-primary/30 transition-all duration-300 shadow-sm relative overflow-hidden group">
                   <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                    <Globe size={120} className="text-foreground" />
+                    <svg
+                      viewBox="0 0 120 80"
+                      width="120"
+                      height="80"
+                      className="text-foreground fill-current"
+                    >
+                      <rect x="0" y="0" width="120" height="80" fill="none" stroke="currentColor" strokeWidth="2" rx="4" />
+                      {/* Stripes */}
+                      <line x1="0" y1="10" x2="120" y2="10" stroke="currentColor" strokeWidth="4" />
+                      <line x1="0" y1="20" x2="120" y2="20" stroke="currentColor" strokeWidth="4" />
+                      <line x1="0" y1="30" x2="120" y2="30" stroke="currentColor" strokeWidth="4" />
+                      <line x1="0" y1="40" x2="120" y2="40" stroke="currentColor" strokeWidth="4" />
+                      <line x1="0" y1="50" x2="120" y2="50" stroke="currentColor" strokeWidth="4" />
+                      <line x1="0" y1="60" x2="120" y2="60" stroke="currentColor" strokeWidth="4" />
+                      <line x1="0" y1="70" x2="120" y2="70" stroke="currentColor" strokeWidth="4" />
+                      
+                      {/* Canton */}
+                      <rect x="0" y="0" width="55" height="45" fill="currentColor" rx="2" />
+                      
+                      {/* Grid of Stylized Star Dots in Canton */}
+                      <g fill="#ffffff" opacity="0.8">
+                        <circle cx="8" cy="8" r="1.5" />
+                        <circle cx="18" cy="8" r="1.5" />
+                        <circle cx="28" cy="8" r="1.5" />
+                        <circle cx="38" cy="8" r="1.5" />
+                        <circle cx="48" cy="8" r="1.5" />
+                        
+                        <circle cx="13" cy="16" r="1.5" />
+                        <circle cx="23" cy="16" r="1.5" />
+                        <circle cx="33" cy="16" r="1.5" />
+                        <circle cx="43" cy="16" r="1.5" />
+                        
+                        <circle cx="8" cy="24" r="1.5" />
+                        <circle cx="18" cy="24" r="1.5" />
+                        <circle cx="28" cy="24" r="1.5" />
+                        <circle cx="38" cy="24" r="1.5" />
+                        <circle cx="48" cy="24" r="1.5" />
+                        
+                        <circle cx="13" cy="32" r="1.5" />
+                        <circle cx="23" cy="32" r="1.5" />
+                        <circle cx="33" cy="32" r="1.5" />
+                        <circle cx="43" cy="32" r="1.5" />
+                        
+                        <circle cx="8" cy="40" r="1.5" />
+                        <circle cx="18" cy="40" r="1.5" />
+                        <circle cx="28" cy="40" r="1.5" />
+                        <circle cx="38" cy="40" r="1.5" />
+                        <circle cx="48" cy="40" r="1.5" />
+                      </g>
+                    </svg>
                   </div>
                   
                   <div>

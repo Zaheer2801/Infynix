@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IconMenu, IconClose } from "./Icons";
 import { openContactModal } from "@/lib/contact-modal";
+import logoImg from "@/assets/logo.png";
 
 const links = [
   { label: "Services", href: "/#services" },
@@ -30,7 +31,6 @@ export function Navbar({ dark = false }: { dark?: boolean }) {
       ? "bg-background border-b border-border shadow-[0_1px_0_0_var(--color-border)]"
       : "bg-background border-b border-border";
 
-  const logoColor = dark ? "text-white" : "text-foreground";
   const linkColor = dark
     ? "text-slate-300 hover:text-white"
     : "text-foreground/80 hover:text-primary";
@@ -39,10 +39,12 @@ export function Navbar({ dark = false }: { dark?: boolean }) {
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${headerBg}`}>
       <nav className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="/#top" className={`font-extrabold tracking-tight text-[16px] flex items-center gap-1.5 hover:opacity-90 duration-300 ${logoColor}`}>
-          <span>INFYNIX</span> 
-          <span className="text-primary font-medium tracking-[0.06em]">TECH SOLUTIONS</span>
-          <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
+        <a href="/#top" className="flex items-center hover:opacity-90 duration-300">
+          <img 
+            src={logoImg} 
+            alt="Infynix Tech Solutions" 
+            className="h-11 w-auto object-contain"
+          />
         </a>
 
         <ul className="hidden lg:flex items-center gap-8">

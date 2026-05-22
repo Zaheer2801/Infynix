@@ -4,6 +4,7 @@ import { Link } from "@tanstack/react-router";
 import eVerifyLogo from "@/assets/e-verify.png";
 import dunsLogo from "@/assets/duns-registered.png";
 import { openContactModal } from "@/lib/contact-modal";
+import logoImg from "@/assets/logo.png";
 
 const IconX = (p: SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}>
@@ -62,8 +63,12 @@ export function Footer() {
       <div className="mx-auto max-w-[1200px] px-6" style={{ paddingTop: "70px", paddingBottom: "30px" }}>
         <div className="grid lg:grid-cols-[1.6fr_1fr_1fr_1fr_1.2fr] gap-10">
           <div>
-            <div className="font-bold tracking-tight text-base">
-              INFYNIX <span className="text-primary">TECH SOLUTIONS</span>
+            <div className="flex items-center">
+              <img 
+                src={logoImg} 
+                alt="Infynix Tech Solutions" 
+                className="h-14 w-auto object-contain" 
+              />
             </div>
             <p className="mt-5 text-sm leading-[1.7] text-dark-muted">
               Your strategic partner for IT staffing, AI solutions, and digital transformation.

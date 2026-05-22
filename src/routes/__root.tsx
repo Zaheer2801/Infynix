@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import logoUrl from "../assets/logo.png";
 
 function NotFoundComponent() {
   return (
@@ -73,19 +74,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Infynix Tech Solutions | Premier Enterprise Technology Partners" },
+      { name: "description", content: "Leading-edge software development, platform engineering, AI/ML deployment, and expert IT staffing." },
+      { name: "author", content: "Infynix Tech Solutions" },
+      { property: "og:title", content: "Infynix Tech Solutions | Premier Technology Partner" },
+      { property: "og:description", content: "Accelerate your digital evolution with our expert platform engineering, bespoke software development, and AI integration services." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:site", content: "@infynixtek" },
     ],
     links: [
       {
         rel: "icon",
-        href: "data:,",
+        type: "image/png",
+        href: logoUrl,
       },
       {
         rel: "stylesheet",
