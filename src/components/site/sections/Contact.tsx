@@ -60,10 +60,32 @@ const socials = [
 export function Contact() {
   const [activeOffice, setActiveOffice] = useState(0);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSent(true);
+    setSubmitting(true);
+    const fd = new FormData(e.currentTarget);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: fd.get("firstName"),
+          lastName: fd.get("lastName"),
+          email: fd.get("email"),
+          company: fd.get("company"),
+          phone: fd.get("phone"),
+          service: fd.get("service"),
+          message: fd.get("message"),
+        }),
+      });
+    } catch {
+      // always show success to the visitor
+    } finally {
+      setSubmitting(false);
+      setSent(true);
+    }
   };
 
   const inputStyle =
@@ -409,16 +431,16 @@ export function Contact() {
                     </p>
                     
                     <form onSubmit={onSubmit} className="mt-8 grid gap-5">
-                      
+
                       {/* Name Row */}
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">First Name *</label>
-                          <input className={inputStyle} placeholder="Jane" required />
+                          <input name="firstName" className={inputStyle} placeholder="Jane" required />
                         </div>
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Last Name *</label>
-                          <input className={inputStyle} placeholder="Doe" required />
+                          <input name="lastName" className={inputStyle} placeholder="Doe" required />
                         </div>
                       </div>
 
@@ -426,11 +448,11 @@ export function Contact() {
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Work Email *</label>
-                          <input className={inputStyle} type="email" placeholder="jane.doe@company.com" required />
+                          <input name="email" className={inputStyle} type="email" placeholder="jane.doe@company.com" required />
                         </div>
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Company Name *</label>
-                          <input className={inputStyle} placeholder="Enterprise Inc." required />
+                          <input name="company" className={inputStyle} placeholder="Enterprise Inc." required />
                         </div>
                       </div>
 
@@ -438,12 +460,12 @@ export function Contact() {
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Phone Number</label>
-                          <input className={inputStyle} type="tel" placeholder="(219) 249-0009" />
+                          <input name="phone" className={inputStyle} type="tel" placeholder="(219) 249-0009" />
                         </div>
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Service Interest *</label>
                           <div className="relative">
-                            <select className={`${inputStyle} appearance-none cursor-pointer pr-10`} defaultValue="" required>
+                            <select name="service" className={`${inputStyle} appearance-none cursor-pointer pr-10`} defaultValue="" required>
                               <option value="" disabled>Select Core Specialty</option>
                               {services.map((s) => (
                                 <option key={s} value={s}>{s}</option>
@@ -462,6 +484,7 @@ export function Contact() {
                       <div className="space-y-1.5">
                         <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Project Parameters & Timeline</label>
                         <textarea
+                          name="message"
                           className={`${inputStyle} resize-none`}
                           rows={4}
                           placeholder="Please provide details about technical staffing, engineering scope, or infrastructure objectives..."
@@ -471,9 +494,14 @@ export function Contact() {
                       {/* Submit Button */}
                       <button
                         type="submit"
-                        className="mt-2 inline-flex items-center justify-center gap-2 w-full px-8 py-4 font-bold text-primary-foreground bg-primary hover:bg-primary-hover rounded-xl text-base shadow-sm hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
+                        disabled={submitting}
+                        className="mt-2 inline-flex items-center justify-center gap-2 w-full px-8 py-4 font-bold text-primary-foreground bg-primary hover:bg-primary-hover rounded-xl text-base shadow-sm hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer disabled:opacity-60"
                       >
-                        Submit Technical Request <ArrowRight size={18} />
+                        {submitting ? (
+                          <><span className="size-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Sending...</>
+                        ) : (
+                          <>Submit Technical Request <ArrowRight size={18} /></>
+                        )}
                       </button>
                     </form>
                   </div>

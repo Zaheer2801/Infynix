@@ -284,7 +284,15 @@ function ApplyForm({ jobTitle, jobCode }: { jobTitle: string; jobCode?: string }
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setState("submitting");
-    await new Promise((r) => setTimeout(r, 1200));
+    try {
+      await fetch("/api/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ jobTitle, jobCode: jobCode ?? "", ...form }),
+      });
+    } catch {
+      // still show success — email failure shouldn't block the UX
+    }
     setState("success");
   };
 
