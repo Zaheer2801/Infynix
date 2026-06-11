@@ -44,7 +44,7 @@ const offices = [
     ],
     mapSrc:
       "https://www.google.com/maps?q=7901+4TH+ST+N+STE+300,+St.+Petersburg,+FL+33702&z=14&output=embed",
-    phone: "(219) 249-0009",
+    phone: "+1 (786) 400-1280",
     email: "info@infynixtek.com",
     hours: "8:00 AM – 6:00 PM EST",
   },
@@ -288,38 +288,24 @@ export function Contact() {
                   </div>
                 </div>
 
-                {/* Support Directories & Social Networks */}
+                {/* Primary Contact & Social Networks */}
                 <div className="bg-secondary/15 border border-border/60 rounded-xl p-5 space-y-4 shadow-sm">
                   <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-                    <ShieldCheck size={14} className="text-primary" /> Core Directories
+                    <ShieldCheck size={14} className="text-primary" /> Get In Touch
                   </div>
-                  <div className="grid grid-cols-2 gap-3 text-xs">
-                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
-                      <span className="text-muted-foreground font-medium">Careers / HR</span>
-                      <a href="mailto:hr@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
-                        hr@infynixtek.com
-                      </a>
-                    </div>
-                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
-                      <span className="text-muted-foreground font-medium">Enterprise Sales</span>
-                      <a href="mailto:sales@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
-                        sales@infynixtek.com
-                      </a>
-                    </div>
-                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
-                      <span className="text-muted-foreground font-medium">Technical Support</span>
-                      <a href="mailto:support@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
-                        support@infynixtek.com
-                      </a>
-                    </div>
-                    <div className="bg-background/40 border border-border/40 rounded-lg p-2.5 flex flex-col hover:border-primary/20 transition-all duration-300">
-                      <span className="text-muted-foreground font-medium">General Inquiries</span>
-                      <a href="mailto:info@infynixtek.com" className="text-foreground hover:text-primary transition-colors font-semibold mt-1">
+                  <a
+                    href="mailto:info@infynixtek.com"
+                    className="bg-background/40 border border-border/40 rounded-lg p-3.5 flex items-center gap-3 hover:border-primary/30 transition-all duration-300 group/email"
+                  >
+                    <Mail size={18} className="text-primary shrink-0" />
+                    <div className="flex flex-col">
+                      <span className="text-xs text-muted-foreground font-medium">Email us at</span>
+                      <span className="text-sm text-foreground group-hover/email:text-primary transition-colors font-semibold">
                         info@infynixtek.com
-                      </a>
+                      </span>
                     </div>
-                  </div>
-                  
+                  </a>
+
                   {/* Social Network Integrations */}
                   <div className="flex items-center justify-between pt-3 border-t border-border/40">
                     <span className="text-xs text-muted-foreground font-medium">Global presence:</span>
@@ -460,7 +446,7 @@ export function Contact() {
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Phone Number</label>
-                          <input name="phone" className={inputStyle} type="tel" placeholder="(219) 249-0009" />
+                          <input name="phone" className={inputStyle} type="tel" placeholder="+1 (786) 400-1280" />
                         </div>
                         <div className="space-y-1.5">
                           <label className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Service Interest *</label>

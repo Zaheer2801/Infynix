@@ -36,10 +36,10 @@ export function CtaBanner() {
               Start a Conversation <IconArrowRight width={16} height={16} />
             </button>
             <a
-              href="tel:+12192490009"
+              href="tel:+17864001280"
               className="inline-flex items-center gap-2 border border-white/20 text-white hover:border-white/50 px-8 py-4 text-sm font-semibold rounded-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
             >
-              Call Us Today: +1 (219) 249-0009
+              Call Us Today: +1 (786) 400-1280
             </a>
           </div>
         </Reveal>

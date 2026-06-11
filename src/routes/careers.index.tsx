@@ -97,7 +97,7 @@ function CareersPage() {
               We're always interested in exceptional talent. Send us your details and we'll reach out when a matching role opens.
             </p>
             <a
-              href="mailto:careers@infynixtek.com"
+              href="mailto:info@infynixtek.com"
               className="mt-6 inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary-hover px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               Send open application <ArrowRight size={16} />
