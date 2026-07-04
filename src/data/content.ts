@@ -1065,6 +1065,7 @@ export type DigitalProduct = {
   priceLabel: string;
   features: string[];
   idealFor: string[];
+  featured?: boolean;
 };
 
 export const digitalProducts: DigitalProduct[] = [
@@ -1299,6 +1300,7 @@ export const digitalProducts: DigitalProduct[] = [
     title: "Complete Career Guidance Program",
     audience: "Job Seekers",
     category: "1:1 Coaching",
+    featured: true,
     tagline: "End-to-end personal training, mentorship, and mock interviews — with us until you land the job.",
     overview:
       "Our most comprehensive career service: a dedicated 1:1 coach works with you from day one through your offer letter. That means personalized skill training, resume and LinkedIn optimization, unlimited mock interviews, and ongoing application strategy — all bundled into a single engagement that doesn't end until you're placed.",
