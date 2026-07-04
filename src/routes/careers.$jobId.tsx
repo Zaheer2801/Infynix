@@ -276,6 +276,7 @@ type FormState = "idle" | "submitting" | "success";
 function ApplyForm({ jobTitle, jobCode }: { jobTitle: string; jobCode?: string }) {
   const [state, setState] = useState<FormState>("idle");
   const [form, setForm] = useState({ name: "", email: "", phone: "", linkedin: "", message: "" });
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -284,16 +285,22 @@ function ApplyForm({ jobTitle, jobCode }: { jobTitle: string; jobCode?: string }
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setState("submitting");
+    setError("");
     try {
-      await fetch("/api/apply", {
+      const res = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ jobTitle, jobCode: jobCode ?? "", ...form }),
       });
-    } catch {
-      // still show success — email failure shouldn't block the UX
+      if (!res.ok) {
+        const data = await res.json().catch(() => null) as { error?: string } | null;
+        throw new Error(data?.error ?? "Something went wrong, please try again.");
+      }
+      setState("success");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong, please try again.");
+      setState("idle");
     }
-    setState("success");
   };
 
   if (state === "success") {
@@ -352,6 +359,8 @@ function ApplyForm({ jobTitle, jobCode }: { jobTitle: string; jobCode?: string }
             className="form-input resize-none"
           />
         </Field>
+
+        {error && <p className="text-sm font-medium text-red-600">{error}</p>}
 
         <div className="flex items-center justify-between pt-1">
           <p className="text-xs" style={{ color: "#6b7280" }}>We respond to every application within 1 business day.</p>

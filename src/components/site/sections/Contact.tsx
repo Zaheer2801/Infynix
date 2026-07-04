@@ -62,12 +62,15 @@ export function Contact() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  const [error, setError] = useState("");
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
+    setError("");
     const fd = new FormData(e.currentTarget);
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -80,11 +83,15 @@ export function Contact() {
           message: fd.get("message"),
         }),
       });
-    } catch {
-      // always show success to the visitor
+      if (!res.ok) {
+        const data = await res.json().catch(() => null) as { error?: string } | null;
+        throw new Error(data?.error ?? "Something went wrong, please try again.");
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong, please try again.");
     } finally {
       setSubmitting(false);
-      setSent(true);
     }
   };
 
@@ -476,6 +483,10 @@ export function Contact() {
                           placeholder="Please provide details about technical staffing, engineering scope, or infrastructure objectives..."
                         />
                       </div>
+
+                      {error && (
+                        <p className="text-sm font-medium text-red-600">{error}</p>
+                      )}
 
                       {/* Submit Button */}
                       <button

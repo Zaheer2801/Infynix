@@ -17,7 +17,96 @@ type Env = {
   BLOG_KV: KVNamespace;
   VITE_GEMINI_API_KEY?: string;
   GEMINI_API_KEY?: string;
+  RESEND_API_KEY?: string;
+  ADMIN_API_TOKEN?: string;
 };
+
+const NOTIFY_TO_EMAIL = "info@infynixtek.com";
+const NOTIFY_FROM_EMAIL = "Infynix Website <notifications@infynixtek.com>";
+
+function escapeHtml(value: unknown): string {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+// Simple string field extractor: trims, caps length, and rejects non-strings.
+function field(body: Record<string, unknown>, key: string, maxLen = 500): string {
+  const value = body[key];
+  if (typeof value !== "string") return "";
+  return value.trim().slice(0, maxLen);
+}
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+async function sendNotificationEmail(
+  env: Env,
+  opts: { subject: string; replyTo?: string; rows: [string, string][] }
+): Promise<{ ok: boolean; error?: string }> {
+  if (!env.RESEND_API_KEY) {
+    return { ok: false, error: "Email is not configured" };
+  }
+
+  const html = `<h2 style="font-family:sans-serif">${escapeHtml(opts.subject)}</h2>
+    <table style="font-family:sans-serif;border-collapse:collapse">
+      ${opts.rows
+        .map(
+          ([label, value]) =>
+            `<tr><td style="padding:6px 12px;font-weight:600;vertical-align:top">${escapeHtml(label)}</td><td style="padding:6px 12px;white-space:pre-wrap">${escapeHtml(value)}</td></tr>`
+        )
+        .join("")}
+    </table>`;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: NOTIFY_FROM_EMAIL,
+      to: [NOTIFY_TO_EMAIL],
+      reply_to: opts.replyTo && isValidEmail(opts.replyTo) ? [opts.replyTo] : undefined,
+      subject: opts.subject,
+      html,
+    }),
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    return { ok: false, error: `Resend error ${response.status}: ${text.slice(0, 300)}` };
+  }
+  return { ok: true };
+}
+
+// Minimal per-IP rate limit backed by KV: `max` requests per `windowSeconds`.
+async function checkRateLimit(
+  env: Env,
+  request: Request,
+  routeKey: string,
+  max: number,
+  windowSeconds: number
+): Promise<boolean> {
+  const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+  const key = `ratelimit:${routeKey}:${ip}`;
+  const current = await env.BLOG_KV.get(key);
+  const count = current ? parseInt(current, 10) : 0;
+  if (count >= max) return false;
+  await env.BLOG_KV.put(key, String(count + 1), { expirationTtl: windowSeconds });
+  return true;
+}
+
+function jsonResponse(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "content-type": "application/json" },
+  });
+}
 
 type ServerEntry = {
   fetch: (request: Request, env: Env, ctx: ExecutionContext) => Promise<Response> | Response;
@@ -206,12 +295,94 @@ export default {
       });
     }
 
-    // API: POST /api/generate (manual trigger for seeding, internal use)
+    // API: POST /api/generate (manual trigger for seeding, internal use only)
     if (url.pathname === "/api/generate" && request.method === "POST") {
+      const token = request.headers.get("authorization")?.replace(/^Bearer\s+/i, "");
+      if (!env.ADMIN_API_TOKEN || token !== env.ADMIN_API_TOKEN) {
+        return jsonResponse({ ok: false, error: "Unauthorized" }, 401);
+      }
       ctx.waitUntil(generateDailyPosts(env));
-      return new Response(JSON.stringify({ ok: true }), {
-        headers: { "content-type": "application/json" },
+      return jsonResponse({ ok: true });
+    }
+
+    // API: POST /api/contact — general inquiry / "request a callback" forms
+    if (url.pathname === "/api/contact" && request.method === "POST") {
+      if (!(await checkRateLimit(env, request, "contact", 5, 600))) {
+        return jsonResponse({ ok: false, error: "Too many requests, please try again later" }, 429);
+      }
+      let body: Record<string, unknown>;
+      try {
+        body = (await request.json()) as Record<string, unknown>;
+      } catch {
+        return jsonResponse({ ok: false, error: "Invalid request body" }, 400);
+      }
+
+      const firstName = field(body, "firstName", 80);
+      const lastName = field(body, "lastName", 80);
+      const email = field(body, "email", 120);
+      if (!firstName || !email || !isValidEmail(email)) {
+        return jsonResponse({ ok: false, error: "Name and a valid email are required" }, 400);
+      }
+
+      const result = await sendNotificationEmail(env, {
+        subject: `New website inquiry from ${firstName} ${lastName}`.trim(),
+        replyTo: email,
+        rows: [
+          ["Name", `${firstName} ${lastName}`.trim()],
+          ["Email", email],
+          ["Phone", field(body, "phone", 32)],
+          ["Company", field(body, "company") || field(body, "companyName")],
+          ["Country", field(body, "country")],
+          ["Inquiry Type", field(body, "service") || field(body, "inquiryType")],
+          ["Message", field(body, "message", 2000) || field(body, "additionalInfo", 2000)],
+        ],
       });
+
+      if (!result.ok) {
+        console.error("Failed to send contact email:", result.error);
+        return jsonResponse({ ok: false, error: "Could not send your message right now" }, 502);
+      }
+      return jsonResponse({ ok: true });
+    }
+
+    // API: POST /api/apply — careers application form
+    if (url.pathname === "/api/apply" && request.method === "POST") {
+      if (!(await checkRateLimit(env, request, "apply", 5, 600))) {
+        return jsonResponse({ ok: false, error: "Too many requests, please try again later" }, 429);
+      }
+      let body: Record<string, unknown>;
+      try {
+        body = (await request.json()) as Record<string, unknown>;
+      } catch {
+        return jsonResponse({ ok: false, error: "Invalid request body" }, 400);
+      }
+
+      const name = field(body, "name", 120);
+      const email = field(body, "email", 120);
+      if (!name || !email || !isValidEmail(email)) {
+        return jsonResponse({ ok: false, error: "Name and a valid email are required" }, 400);
+      }
+
+      const jobTitle = field(body, "jobTitle", 160);
+      const result = await sendNotificationEmail(env, {
+        subject: `New application: ${jobTitle || "Unspecified role"} — ${name}`,
+        replyTo: email,
+        rows: [
+          ["Job Title", jobTitle],
+          ["Job Code", field(body, "jobCode", 40)],
+          ["Name", name],
+          ["Email", email],
+          ["Phone", field(body, "phone", 32)],
+          ["LinkedIn", field(body, "linkedin", 200)],
+          ["Message", field(body, "message", 3000)],
+        ],
+      });
+
+      if (!result.ok) {
+        console.error("Failed to send application email:", result.error);
+        return jsonResponse({ ok: false, error: "Could not submit your application right now" }, 502);
+      }
+      return jsonResponse({ ok: true });
     }
 
     try {

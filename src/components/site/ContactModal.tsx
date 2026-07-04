@@ -9,6 +9,8 @@ const labelCls = "block text-sm font-medium text-foreground mb-1.5";
 export function ContactModal() {
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -27,13 +29,40 @@ export function ContactModal() {
     };
   }, [open]);
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => {
-      setOpen(false);
-      setSent(false);
-    }, 1400);
+    setSubmitting(true);
+    setError("");
+    const fd = new FormData(e.currentTarget as HTMLFormElement);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: fd.get("firstName"),
+          lastName: fd.get("lastName"),
+          email: fd.get("email"),
+          phone: fd.get("phone"),
+          companyName: fd.get("companyName"),
+          country: fd.get("country"),
+          inquiryType: fd.get("inquiryType"),
+          additionalInfo: fd.get("additionalInfo"),
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null) as { error?: string } | null;
+        throw new Error(data?.error ?? "Something went wrong, please try again.");
+      }
+      setSent(true);
+      setTimeout(() => {
+        setOpen(false);
+        setSent(false);
+      }, 1400);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong, please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!open) return null;
@@ -86,7 +115,7 @@ export function ContactModal() {
           <form onSubmit={onSubmit} className="space-y-4 mt-2">
             <div>
               <label className={labelCls}>Inquiry Type</label>
-              <select className={inputCls} defaultValue="General Inquiry">
+              <select name="inquiryType" className={inputCls} defaultValue="General Inquiry">
                 <option>General Inquiry</option>
                 <option>IT Staffing & Recruitment</option>
                 <option>AI & Machine Learning</option>
@@ -100,13 +129,13 @@ export function ContactModal() {
                 <label className={labelCls}>
                   First Name <span className="text-red-500">*</span>
                 </label>
-                <input className={inputCls} required maxLength={80} />
+                <input name="firstName" className={inputCls} required maxLength={80} />
               </div>
               <div>
                 <label className={labelCls}>
                   Last Name <span className="text-red-500">*</span>
                 </label>
-                <input className={inputCls} required maxLength={80} />
+                <input name="lastName" className={inputCls} required maxLength={80} />
               </div>
             </div>
             <div>
@@ -114,6 +143,7 @@ export function ContactModal() {
                 Phone Number <span className="text-red-500">*</span>
               </label>
               <input
+                name="phone"
                 className={inputCls}
                 placeholder="+1 201-555-0123"
                 required
@@ -125,6 +155,7 @@ export function ContactModal() {
                 Email <span className="text-red-500">*</span>
               </label>
               <input
+                name="email"
                 type="email"
                 className={inputCls}
                 required
@@ -136,18 +167,18 @@ export function ContactModal() {
                 <label className={labelCls}>
                   Company Name <span className="text-red-500">*</span>
                 </label>
-                <input className={inputCls} required maxLength={120} />
+                <input name="companyName" className={inputCls} required maxLength={120} />
               </div>
               <div>
                 <label className={labelCls}>
                   Country <span className="text-red-500">*</span>
                 </label>
-                <input className={inputCls} required maxLength={60} />
+                <input name="country" className={inputCls} required maxLength={60} />
               </div>
             </div>
             <div>
               <label className={labelCls}>Additional Information</label>
-              <textarea className={inputCls} rows={3} maxLength={1000} />
+              <textarea name="additionalInfo" className={inputCls} rows={3} maxLength={1000} />
             </div>
             <label className="flex items-start gap-2 text-sm text-foreground">
               <input type="checkbox" required className="mt-1" />
@@ -159,11 +190,13 @@ export function ContactModal() {
                 of Infynix Tech Solutions. <span className="text-red-500">*</span>
               </span>
             </label>
+            {error && <p className="text-sm font-medium text-red-600">{error}</p>}
             <button
               type="submit"
-              className="w-full md:w-auto px-7 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary-hover transition-colors"
+              disabled={submitting}
+              className="w-full md:w-auto px-7 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary-hover transition-colors disabled:opacity-60 cursor-pointer"
             >
-              {sent ? "Sent ✓" : "Request a callback"}
+              {sent ? "Sent ✓" : submitting ? "Sending..." : "Request a callback"}
             </button>
           </form>
         </div>
