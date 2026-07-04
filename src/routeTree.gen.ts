@@ -9,20 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DigitalProductsRouteImport } from './routes/digital-products'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DigitalProductsIndexRouteImport } from './routes/digital-products.index'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as CareersIndexRouteImport } from './routes/careers.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
+import { Route as DigitalProductsSlugRouteImport } from './routes/digital-products.$slug'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as CareersJobIdRouteImport } from './routes/careers.$jobId'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
+const DigitalProductsRoute = DigitalProductsRouteImport.update({
+  id: '/digital-products',
+  path: '/digital-products',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
   id: '/case-studies',
   path: '/case-studies',
@@ -47,6 +55,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DigitalProductsIndexRoute = DigitalProductsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DigitalProductsRoute,
 } as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   id: '/',
@@ -73,6 +86,11 @@ const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
   path: '/industries/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DigitalProductsSlugRoute = DigitalProductsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DigitalProductsRoute,
+} as any)
 const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -95,14 +113,17 @@ export interface FileRoutesByFullPath {
   '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/digital-products': typeof DigitalProductsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/digital-products/$slug': typeof DigitalProductsSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/careers/': typeof CareersIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
+  '/digital-products/': typeof DigitalProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,11 +131,13 @@ export interface FileRoutesByTo {
   '/blog/$slug': typeof BlogSlugRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/digital-products/$slug': typeof DigitalProductsSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/blog': typeof BlogIndexRoute
   '/careers': typeof CareersIndexRoute
   '/case-studies': typeof CaseStudiesIndexRoute
+  '/digital-products': typeof DigitalProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -123,14 +146,17 @@ export interface FileRoutesById {
   '/blog': typeof BlogRouteWithChildren
   '/careers': typeof CareersRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
+  '/digital-products': typeof DigitalProductsRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/careers/$jobId': typeof CareersJobIdRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/digital-products/$slug': typeof DigitalProductsSlugRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/careers/': typeof CareersIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
+  '/digital-products/': typeof DigitalProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -140,14 +166,17 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/case-studies'
+    | '/digital-products'
     | '/blog/$slug'
     | '/careers/$jobId'
     | '/case-studies/$slug'
+    | '/digital-products/$slug'
     | '/industries/$slug'
     | '/services/$slug'
     | '/blog/'
     | '/careers/'
     | '/case-studies/'
+    | '/digital-products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,11 +184,13 @@ export interface FileRouteTypes {
     | '/blog/$slug'
     | '/careers/$jobId'
     | '/case-studies/$slug'
+    | '/digital-products/$slug'
     | '/industries/$slug'
     | '/services/$slug'
     | '/blog'
     | '/careers'
     | '/case-studies'
+    | '/digital-products'
   id:
     | '__root__'
     | '/'
@@ -167,14 +198,17 @@ export interface FileRouteTypes {
     | '/blog'
     | '/careers'
     | '/case-studies'
+    | '/digital-products'
     | '/blog/$slug'
     | '/careers/$jobId'
     | '/case-studies/$slug'
+    | '/digital-products/$slug'
     | '/industries/$slug'
     | '/services/$slug'
     | '/blog/'
     | '/careers/'
     | '/case-studies/'
+    | '/digital-products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -183,12 +217,20 @@ export interface RootRouteChildren {
   BlogRoute: typeof BlogRouteWithChildren
   CareersRoute: typeof CareersRouteWithChildren
   CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
+  DigitalProductsRoute: typeof DigitalProductsRouteWithChildren
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/digital-products': {
+      id: '/digital-products'
+      path: '/digital-products'
+      fullPath: '/digital-products'
+      preLoaderRoute: typeof DigitalProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/case-studies': {
       id: '/case-studies'
       path: '/case-studies'
@@ -224,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/digital-products/': {
+      id: '/digital-products/'
+      path: '/'
+      fullPath: '/digital-products/'
+      preLoaderRoute: typeof DigitalProductsIndexRouteImport
+      parentRoute: typeof DigitalProductsRoute
+    }
     '/case-studies/': {
       id: '/case-studies/'
       path: '/'
@@ -258,6 +307,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/industries/$slug'
       preLoaderRoute: typeof IndustriesSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/digital-products/$slug': {
+      id: '/digital-products/$slug'
+      path: '/$slug'
+      fullPath: '/digital-products/$slug'
+      preLoaderRoute: typeof DigitalProductsSlugRouteImport
+      parentRoute: typeof DigitalProductsRoute
     }
     '/case-studies/$slug': {
       id: '/case-studies/$slug'
@@ -322,12 +378,27 @@ const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
   CaseStudiesRouteChildren,
 )
 
+interface DigitalProductsRouteChildren {
+  DigitalProductsSlugRoute: typeof DigitalProductsSlugRoute
+  DigitalProductsIndexRoute: typeof DigitalProductsIndexRoute
+}
+
+const DigitalProductsRouteChildren: DigitalProductsRouteChildren = {
+  DigitalProductsSlugRoute: DigitalProductsSlugRoute,
+  DigitalProductsIndexRoute: DigitalProductsIndexRoute,
+}
+
+const DigitalProductsRouteWithChildren = DigitalProductsRoute._addFileChildren(
+  DigitalProductsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BlogRoute: BlogRouteWithChildren,
   CareersRoute: CareersRouteWithChildren,
   CaseStudiesRoute: CaseStudiesRouteWithChildren,
+  DigitalProductsRoute: DigitalProductsRouteWithChildren,
   IndustriesSlugRoute: IndustriesSlugRoute,
   ServicesSlugRoute: ServicesSlugRoute,
 }

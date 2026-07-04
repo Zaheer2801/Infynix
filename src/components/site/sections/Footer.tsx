@@ -42,6 +42,7 @@ const cols: { title: string; items: FooterLink[] }[] = [
       { label: "About Us", to: "/about" },
       { label: "Careers", to: "/careers" },
       { label: "Case Studies", to: "/case-studies" },
+      { label: "Digital Products", to: "/digital-products" },
       { label: "Blog", to: "/blog" },
       { label: "Contact", action: "contact" },
       { label: "Privacy Policy", to: "/" },

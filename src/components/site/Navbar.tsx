@@ -7,6 +7,7 @@ const links = [
   { label: "Services", href: "/#services" },
   { label: "Industries", href: "/#industries" },
   { label: "Solutions", href: "/#process" },
+  { label: "Digital Products", href: "/digital-products" },
   { label: "About", href: "/#about" },
   { label: "Careers", href: "/careers" },
   { label: "Contact", href: "#contact", action: "contact" as const },

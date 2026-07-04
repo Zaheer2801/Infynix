@@ -1051,3 +1051,267 @@ export const jobExtras: Record<string, JobExtra> = {
     ],
   },
 };
+
+export type DigitalProductAudience = "Businesses" | "Students" | "Job Seekers";
+
+export type DigitalProduct = {
+  slug: string;
+  title: string;
+  audience: DigitalProductAudience;
+  category: string;
+  tagline: string;
+  overview: string;
+  format: string;
+  priceLabel: string;
+  features: string[];
+  idealFor: string[];
+};
+
+export const digitalProducts: DigitalProduct[] = [
+  {
+    slug: "saas-starter-kit",
+    title: "SaaS Starter Kit",
+    audience: "Businesses",
+    category: "Templates & Starter Kits",
+    tagline: "Production-ready SaaS boilerplate with auth, billing, and an admin dashboard baked in.",
+    overview:
+      "Skip months of undifferentiated setup work. Our SaaS Starter Kit gives your team a fully typed, production-grade foundation — authentication, subscription billing, role-based access, and an admin dashboard — so engineering time goes straight into your actual product.",
+    format: "Downloadable source code + setup docs",
+    priceLabel: "From $799",
+    features: [
+      "Prebuilt auth (email, OAuth, magic links) and role-based access control",
+      "Stripe subscription billing wired end-to-end, including webhooks",
+      "Admin dashboard for users, plans, and usage metrics",
+      "TypeScript, modern React, and CI-ready deployment config",
+    ],
+    idealFor: ["Startups launching an MVP", "Internal tools teams", "Agencies spinning up client SaaS products"],
+  },
+  {
+    slug: "cloud-landing-zone-template",
+    title: "Cloud Landing Zone Templates",
+    audience: "Businesses",
+    category: "Templates & Starter Kits",
+    tagline: "Terraform-based AWS/Azure/GCP landing zones following our enterprise security baselines.",
+    overview:
+      "Get the same multi-account cloud foundation we build for enterprise clients — as a reusable Terraform package. Includes network segmentation, IAM guardrails, logging, and cost-control defaults so your cloud footprint starts secure and compliant, not retrofitted later.",
+    format: "Terraform modules + architecture docs",
+    priceLabel: "From $1,200",
+    features: [
+      "Multi-account landing zone for AWS, Azure, or GCP",
+      "Pre-configured IAM boundaries, logging, and guardrails",
+      "Cost-control tagging and budget alert defaults",
+      "Documented reference architecture diagrams",
+    ],
+    idealFor: ["Startups moving to the cloud", "Teams without a dedicated DevOps hire", "Companies preparing for a security audit"],
+  },
+  {
+    slug: "rag-chatbot-kit",
+    title: "AI Knowledge Assistant Kit",
+    audience: "Businesses",
+    category: "AI Products",
+    tagline: "A RAG-powered chatbot template you can point at your own documents and deploy internally.",
+    overview:
+      "A self-hosted retrieval-augmented generation (RAG) chatbot template pre-wired for internal knowledge bases — HR policies, support docs, engineering wikis. Bring your own documents and API key, and have a working assistant running in days, not months.",
+    format: "Source code + deployment guide",
+    priceLabel: "From $999",
+    features: [
+      "Document ingestion pipeline (PDF, Markdown, Notion export)",
+      "Hybrid vector + keyword retrieval configured out of the box",
+      "Simple chat UI, easily themeable to your brand",
+      "Guardrails for source citation and hallucination reduction",
+    ],
+    idealFor: ["HR & internal support teams", "Companies with large document libraries", "Teams exploring AI without a big upfront build"],
+  },
+  {
+    slug: "ecommerce-storefront-template",
+    title: "E-Commerce Storefront Template",
+    audience: "Businesses",
+    category: "Templates & Starter Kits",
+    tagline: "Headless storefront template with cart, checkout, and CMS-driven product pages.",
+    overview:
+      "A fast, SEO-friendly storefront template built on modern headless commerce patterns. Comes with cart, checkout, and CMS-managed product pages so non-technical teams can update content without touching code.",
+    format: "Downloadable source code + CMS setup guide",
+    priceLabel: "From $699",
+    features: [
+      "Headless storefront with sub-1s page loads",
+      "Cart, checkout, and payment provider integration",
+      "CMS-managed product and content pages",
+      "Mobile-first, accessible UI components",
+    ],
+    idealFor: ["DTC and retail brands", "Businesses replatforming off legacy commerce systems"],
+  },
+  {
+    slug: "power-bi-dashboard-pack",
+    title: "Analytics Dashboard Starter Pack",
+    audience: "Businesses",
+    category: "Templates & Starter Kits",
+    tagline: "Prebuilt Power BI / Tableau dashboards for sales, ops, and finance reporting.",
+    overview:
+      "A set of prebuilt, easily-connected dashboard templates covering the most common reporting needs — sales pipeline, operational KPIs, and finance close. Connect your data source and have executive-ready dashboards live the same week.",
+    format: "Dashboard template files (Power BI / Tableau)",
+    priceLabel: "From $349",
+    features: [
+      "Sales, operations, and finance dashboard templates",
+      "Documented data model and connection guide",
+      "Reusable design system for consistent reporting",
+    ],
+    idealFor: ["Finance and ops teams without dedicated BI staff", "Companies standardizing reporting across departments"],
+  },
+  {
+    slug: "fullstack-project-bootcamp",
+    title: "Full-Stack Project Bootcamp",
+    audience: "Students",
+    category: "Learning & Certification",
+    tagline: "Build a complete full-stack app from scratch with guided source code and video walkthroughs.",
+    overview:
+      "A project-based learning kit that walks you through building a real full-stack application — frontend, backend, database, and deployment — with guided videos, annotated source code, and checkpoints to test your understanding along the way.",
+    format: "Video course + source code + guided docs",
+    priceLabel: "From $79",
+    features: [
+      "8–10 hours of guided video instruction",
+      "Full annotated source code for a real-world app",
+      "Deployment walkthrough (Cloudflare/Vercel)",
+      "Portfolio-ready final project",
+    ],
+    idealFor: ["CS students", "Bootcamp grads building a portfolio", "Career switchers learning to code"],
+  },
+  {
+    slug: "cloud-cert-prep-bundle",
+    title: "Cloud Certification Prep Bundle",
+    audience: "Students",
+    category: "Learning & Certification",
+    tagline: "Structured prep bundle for AWS, Azure, and GCP associate-level certifications.",
+    overview:
+      "Everything you need to pass your first cloud certification: structured study guides, hands-on lab exercises, and full-length practice exams modeled on the real test format — built by engineers who use these platforms daily.",
+    format: "Study guide + practice exams + labs",
+    priceLabel: "From $59",
+    features: [
+      "Domain-by-domain study guides aligned to exam blueprints",
+      "Hands-on lab exercises using free-tier cloud accounts",
+      "Full-length timed practice exams with explanations",
+    ],
+    idealFor: ["Students targeting cloud certifications", "Job seekers upskilling for cloud roles"],
+  },
+  {
+    slug: "tech-resume-portfolio-kit",
+    title: "Tech Resume & Portfolio Kit",
+    audience: "Students",
+    category: "Career Readiness",
+    tagline: "ATS-friendly resume templates and portfolio site templates built specifically for tech roles.",
+    overview:
+      "A kit built specifically for students entering tech: resume templates tuned to pass applicant tracking systems, plus a ready-to-deploy portfolio site template to showcase your projects to recruiters and hiring managers.",
+    format: "Templates (resume + portfolio site source code)",
+    priceLabel: "From $39",
+    features: [
+      "ATS-optimized resume templates for SWE, data, and design roles",
+      "Deployable portfolio site template",
+      "Guide to writing project descriptions recruiters actually read",
+    ],
+    idealFor: ["Students applying for internships", "New grads building their first portfolio"],
+  },
+  {
+    slug: "internship-readiness-track",
+    title: "Internship Readiness Track",
+    audience: "Students",
+    category: "Career Readiness",
+    tagline: "A short, structured track covering Git workflows, code review etiquette, and workplace tools.",
+    overview:
+      "Technical skill isn't the only gap between students and a great internship. This track covers the practical, workplace-specific skills — Git/GitHub workflows, code review etiquette, ticketing systems, and standups — that most classes skip.",
+    format: "Self-paced video modules + checklists",
+    priceLabel: "From $29",
+    features: [
+      "Git & GitHub workflow fundamentals for team environments",
+      "How to give and receive code review feedback",
+      "Working with Jira/Linear, standups, and sprint cycles",
+    ],
+    idealFor: ["Students about to start an internship", "First-time interns and new hires"],
+  },
+  {
+    slug: "mock-interview-package",
+    title: "Technical Mock Interview Package",
+    audience: "Job Seekers",
+    category: "Interview Prep",
+    tagline: "Recorded mock interviews with real engineers, covering technical and behavioral rounds.",
+    overview:
+      "Practice with real engineers, not just an algorithm. This package includes recorded mock interview sessions covering coding rounds, system design, and behavioral questions, with structured written feedback after each session.",
+    format: "1:1 recorded video sessions + written feedback",
+    priceLabel: "From $129 per session",
+    features: [
+      "Live mock interview with an experienced engineer",
+      "Coding, system design, or behavioral round — your choice",
+      "Recorded session plus a written feedback report",
+    ],
+    idealFor: ["Job seekers with interviews scheduled", "Candidates targeting senior/staff roles"],
+  },
+  {
+    slug: "resume-linkedin-optimization",
+    title: "Resume & LinkedIn Optimization",
+    audience: "Job Seekers",
+    category: "Career Services",
+    tagline: "1:1 resume and LinkedIn profile rewrite tuned for tech recruiter search and ATS systems.",
+    overview:
+      "A hands-on rewrite of your resume and LinkedIn profile, optimized for both applicant tracking systems and how technical recruiters actually search and skim. Delivered with a call to walk through the changes and why they matter.",
+    format: "1:1 review call + document deliverables",
+    priceLabel: "From $149",
+    features: [
+      "Full resume rewrite tuned for ATS parsing and recruiter skimming",
+      "LinkedIn profile optimization for recruiter search visibility",
+      "30-minute review call to walk through changes",
+    ],
+    idealFor: ["Active job seekers", "Professionals not getting callbacks despite relevant experience"],
+  },
+  {
+    slug: "job-search-toolkit",
+    title: "Job Search Automation Toolkit",
+    audience: "Job Seekers",
+    category: "Career Services",
+    tagline: "Application tracker, outreach templates, and cover letter generator to run a structured search.",
+    overview:
+      "A structured system for running your job search like a project: an application tracker, proven outreach message templates for recruiters and hiring managers, and a cover letter generator template you can customize per role in minutes.",
+    format: "Notion/spreadsheet template + document templates",
+    priceLabel: "From $35",
+    features: [
+      "Application tracker with stage, follow-up, and offer fields",
+      "Cold outreach templates for recruiters and hiring managers",
+      "Cover letter generator template with role-specific prompts",
+    ],
+    idealFor: ["Job seekers applying at scale", "Career switchers managing a long search"],
+  },
+  {
+    slug: "visa-relocation-guidance",
+    title: "Visa & Relocation Guidance Kit",
+    audience: "Job Seekers",
+    category: "Career Services",
+    tagline: "Practical guidance on H-1B, work visas, and relocation logistics for IT roles in the US.",
+    overview:
+      "Drawing on our IT staffing experience placing international talent, this kit walks through the practical realities of H-1B and other work visa processes, employer sponsorship conversations, and relocation logistics for tech roles in the US.",
+    format: "Guide (PDF) + 1:1 Q&A session",
+    priceLabel: "From $99",
+    features: [
+      "Plain-language walkthrough of common visa pathways for tech roles",
+      "How to raise sponsorship in interviews without hurting your candidacy",
+      "30-minute Q&A session for your specific situation",
+    ],
+    idealFor: ["International students and job seekers", "Candidates needing employer sponsorship"],
+  },
+  {
+    slug: "complete-career-guidance-program",
+    title: "Complete Career Guidance Program",
+    audience: "Job Seekers",
+    category: "1:1 Coaching",
+    tagline: "End-to-end personal training, mentorship, and mock interviews — with us until you land the job.",
+    overview:
+      "Our most comprehensive career service: a dedicated 1:1 coach works with you from day one through your offer letter. That means personalized skill training, resume and LinkedIn optimization, unlimited mock interviews, and ongoing application strategy — all bundled into a single engagement that doesn't end until you're placed.",
+    format: "Ongoing 1:1 coaching & mentorship, until you're hired",
+    priceLabel: "$2,000 flat — until you're hired",
+    features: [
+      "Personalized skill-gap assessment and a structured training plan",
+      "Unlimited 1:1 mentorship sessions with a dedicated career coach",
+      "Resume and LinkedIn optimization included",
+      "Unlimited mock interviews — technical, system design, and behavioral",
+      "Ongoing job search and application strategy coaching",
+      "Continued support through offer negotiation, until you're placed",
+    ],
+    idealFor: ["Job seekers who want hands-on, ongoing support", "Career switchers needing comprehensive guidance", "Candidates who've struggled with a self-directed search"],
+  },
+];
